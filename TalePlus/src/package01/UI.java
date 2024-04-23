@@ -3,7 +3,9 @@ package package01;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -12,11 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 
 public class UI {
-    Border whiteline = BorderFactory.createLineBorder(Color.white);
+    public Border whiteline = BorderFactory.createLineBorder(Color.white);
     Border raised = BorderFactory.createRaisedBevelBorder();
     Border whitetitle = BorderFactory.createCompoundBorder(raised, whiteline);
     public Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
@@ -25,21 +28,35 @@ public class UI {
    
     public JFrame frame;
     
+    public JPanel shopKeeperPanel;
     public JPanel titleNamePanel, startButtonPanel;
     public JPanel masterPlayerPanel;
     public JPanel playerPanel;
     public JPanel infoPanel;
     public JPanel buttonPanel;
     public JPanel picturePanel;
+    public JPanel sellMessagePanel;
     
     public JLabel pictureLabel;
 	public JLabel titleNameLabel;
 	
 	public JButton startButton ;
 	public JButton button1, button2, button3, button4;
+	public JButton closeSellItemMessage;
 	
 	public ImageIcon image;
 	public JLabel hpLabel, expLabel, levelLabel, goldLabel, mpLabel;
+	
+	public JButton[] shopButtons = new JButton[2];
+	public JLabel itemLabel;
+	public JLabel itemPriceLabel;
+	public JLabel itemHealingValue;
+	public JLabel equipmentDamageOrArmorValue;
+	public JButton buyItemButton;
+	public JButton closeItemButton;
+	
+	public JLabel soldItemMessage;
+	
 	
 	public Player player;
 
@@ -174,7 +191,6 @@ public class UI {
 		button4.setFocusPainted(false);
 		button4.addActionListener(null);
 		buttonPanel.add(button4);
-		
 
 		
 
@@ -190,7 +206,7 @@ public class UI {
         
         // MAIN PANEL THAT TAKES UP THE REST OF THE SCREEN
         picturePanel = new JPanel();
-        picturePanel.setLayout(new BorderLayout());
+        picturePanel.setLayout(null);
         picturePanel.setBounds(5, 1, 775, 420);
         picturePanel.setBackground(Color.black);
         picturePanel.setVisible(true);
@@ -203,6 +219,93 @@ public class UI {
         pictureLabel.setIcon(image);
         picturePanel.add(pictureLabel);
         pictureLabel.setVisible(false);
+        
+	    shopKeeperPanel = new JPanel();
+	    shopKeeperPanel.setBounds(0, 1, 330, 410);
+	    shopKeeperPanel.setBackground(Color.blue);
+	    shopKeeperPanel.setVisible(false);
+	    shopKeeperPanel.setBorder(whiteline);
+	    shopKeeperPanel.setLayout(new GridLayout(5,1));
+	    picturePanel.add(shopKeeperPanel);
+	    
+	    shopButtons[0] = new JButton();
+	    shopButtons[0].setBackground(Color.black);
+	    shopButtons[0].setForeground(Color.white);
+	    shopButtons[0].setFont(normalFont);
+	    shopButtons[0].setFocusPainted(false);
+	    //shopButtons[0].addActionListener(this);
+	    shopButtons[0].setActionCommand("button1");
+	    shopButtons[0].setVisible(true);
+	    shopKeeperPanel.add(shopButtons[0]);
+
+	    
+		itemLabel = new JLabel();
+	    itemLabel.setForeground(Color.white);
+	    itemLabel.setVisible(false);
+	    itemLabel.setFont(statsFont);
+		infoPanel.add(itemLabel);
+	    
+		itemPriceLabel = new JLabel();
+		itemPriceLabel.setForeground(Color.white);
+		itemPriceLabel.setVisible(false);
+		itemPriceLabel.setFont(statsFont);
+		infoPanel.add(itemPriceLabel);
+		
+		itemHealingValue = new JLabel();
+		itemHealingValue.setForeground(Color.white);
+		itemHealingValue.setVisible(false);
+		itemHealingValue.setFont(statsFont);
+		infoPanel.add(itemHealingValue);
+	    
+		equipmentDamageOrArmorValue = new JLabel();
+		equipmentDamageOrArmorValue.setForeground(Color.white);
+		equipmentDamageOrArmorValue.setVisible(false);
+		equipmentDamageOrArmorValue.setFont(statsFont);
+		infoPanel.add(equipmentDamageOrArmorValue);
+	    
+		buyItemButton = new JButton();
+		buyItemButton.setBackground(Color.black);
+		buyItemButton.setForeground(Color.white);
+		buyItemButton.setFont(normalFont);
+	    buyItemButton.setFocusPainted(false);
+	    buyItemButton.setActionCommand("buyItem");
+	    buyItemButton.setVisible(false);
+	    infoPanel.add(buyItemButton);
+	    
+	    
+	    sellMessagePanel = new JPanel();
+	    sellMessagePanel.setPreferredSize(new Dimension(237, 130)); // reduced size to accommodate space for mappanel
+	    sellMessagePanel.setBackground(Color.black);
+	    sellMessagePanel.setBorder(whiteline);
+	    sellMessagePanel.setLayout(new GridLayout(2,1));
+	    sellMessagePanel.setVisible(false);
+        masterPlayerPanel.add(sellMessagePanel);
+	    
+	    soldItemMessage = new JLabel();
+	    soldItemMessage.setForeground(Color.white);
+	    soldItemMessage.setFont(normalFont);
+	    soldItemMessage.setVisible(true);
+	    sellMessagePanel.add(soldItemMessage);
+	    
+	    closeItemButton = new JButton("Close");
+	    closeItemButton.setBackground(Color.black);
+	    closeItemButton.setForeground(Color.white);
+	    closeItemButton.setFont(normalFont);
+	    closeItemButton.setFocusPainted(false);    
+	    closeItemButton.setActionCommand("closeItem");
+	    closeItemButton.setVisible(false);
+	    infoPanel.add(closeItemButton);
+	    
+	    closeSellItemMessage = new JButton("Close!");
+	    closeSellItemMessage.setBackground(Color.black);
+	    closeSellItemMessage.setForeground(Color.white);
+	    closeSellItemMessage.setFont(normalFont);
+	    closeSellItemMessage.setFocusPainted(false);    
+	    closeSellItemMessage.setActionCommand("closeItem");
+	    closeSellItemMessage.setVisible(true);
+	    sellMessagePanel.add(closeSellItemMessage);
+	    //infoPanel.add(soldItemMessage);
+
         
 
         frame.setVisible(true);

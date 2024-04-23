@@ -1,6 +1,7 @@
 package GameStates;
 
 import package01.Game;
+import package01.InventoryHandler;
 import package01.Player;
 import package01.UI;
 
@@ -19,12 +20,18 @@ public abstract class GameState {
     protected Game game;
     protected Player player;
     protected UI ui;
+    protected InventoryHandler iHandler;
+    
+    private String name;
+    
 
 
-    public GameState(Game game,Player player,UI ui) {
+    public GameState(Game game,Player player,UI ui, InventoryHandler iHandler) {
         this.game = game;
         this.player = player;
         this.ui = ui;
+        this.iHandler = iHandler;
+        
     }
 
     // Method to update the game state
@@ -71,4 +78,12 @@ public abstract class GameState {
     public static void pushGameState(GameState state) {
         gameStateStack.push(state);
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

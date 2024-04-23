@@ -6,15 +6,12 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import package02.SuperWeapon;
-import package04.Item_Empty;
+import GameStates.TavernState;
 import package04.SuperConsumable;
 import package04.SuperItem;
 
@@ -31,8 +28,11 @@ public class InventoryHandler implements ActionListener{
 	public JLabel itemLabel;
 	public JLabel itemPriceLabel;
 	public JLabel itemHealingValue;
-	public JLabel equipMentDamageOrArmorValue;
+	public JLabel equipmentDamageOrArmorValue;
+	public JLabel damageLabel, armorLabel;
+	private JLabel equipmentStatsLabel, equipmentLabel, inventoryLabel;
 	private JPanel equipmentPanel;
+	private JPanel equipmentStatsPanel;
 	InventoryManager inventoryManager = new InventoryManager();
 	
 	public InventoryHandler(Player player, UI ui) {	
@@ -56,11 +56,19 @@ public class InventoryHandler implements ActionListener{
     //INVENTORY PANEL
     inventoryPanel = new JPanel();
     inventoryPanel.setBackground(Color.black);
-    inventoryPanel.setPreferredSize(new Dimension(330,420));
-    inventoryPanel.setLayout(new GridLayout(5,5));
+    //inventoryPanel.setPreferredSize(new Dimension(330,420));
+    inventoryPanel.setLayout(new GridLayout(6,1));
     inventoryPanel.setVisible(false);
     inventoryPanel.setBorder(ui.whiteline);
-    ui.picturePanel.add(inventoryPanel, BorderLayout.EAST);
+    inventoryPanel.setBounds(445, 1, 330, 420);
+    ui.picturePanel.add(inventoryPanel);
+    
+    //INVENTORY LABEL
+    inventoryLabel = new JLabel("                ---Inventory---");
+    inventoryLabel.setForeground(Color.yellow);
+    inventoryLabel.setVisible(true);
+    inventoryLabel.setFont(ui.statsFont);
+    inventoryPanel.add(inventoryLabel);
     
     //INVENTORY BUTTONS
     inventoryButton1 = new JButton();
@@ -127,11 +135,11 @@ public class InventoryHandler implements ActionListener{
 	itemHealingValue.setFont(ui.statsFont);
 	ui.infoPanel.add(itemHealingValue);
     
-	equipMentDamageOrArmorValue = new JLabel();
-	equipMentDamageOrArmorValue.setForeground(Color.white);
-	equipMentDamageOrArmorValue.setVisible(false);
-	equipMentDamageOrArmorValue.setFont(ui.statsFont);
-	ui.infoPanel.add(equipMentDamageOrArmorValue);
+	equipmentDamageOrArmorValue = new JLabel();
+	equipmentDamageOrArmorValue.setForeground(Color.white);
+	equipmentDamageOrArmorValue.setVisible(false);
+	equipmentDamageOrArmorValue.setFont(ui.statsFont);
+	ui.infoPanel.add(equipmentDamageOrArmorValue);
     
     useItemButton = new JButton("Use:");
     useItemButton.setBackground(Color.black);
@@ -156,12 +164,34 @@ public class InventoryHandler implements ActionListener{
     
     //EQUIPMENT PANEL
     equipmentPanel = new JPanel();
-    equipmentPanel.setPreferredSize(new Dimension(330,420));
+    //equipmentPanel.setPreferredSize(new Dimension(330,420));
+    equipmentPanel.setBounds(0, 1, 330, 210);
     equipmentPanel.setBackground(Color.BLACK);
     equipmentPanel.setVisible(false);
     equipmentPanel.setBorder(ui.whiteline);
-    equipmentPanel.setLayout(new GridLayout(5,5));
-    ui.picturePanel.add(equipmentPanel, BorderLayout.WEST);
+    equipmentPanel.setLayout(new GridLayout(3,2));
+    ui.picturePanel.add(equipmentPanel);
+    
+    equipmentLabel = new JLabel("              ---Equipment---");
+    equipmentLabel.setForeground(Color.yellow);
+    equipmentLabel.setVisible(true);
+    equipmentLabel.setFont(ui.statsFont);
+    equipmentPanel.add(equipmentLabel);
+    
+    equipmentStatsPanel = new JPanel();
+    //equipmentStatsPanel.setPreferredSize(new Dimension(330,120));
+    equipmentStatsPanel.setBounds(0, 240, 330, 180);
+    equipmentStatsPanel.setBackground(Color.black);
+    equipmentStatsPanel.setVisible(false);
+    equipmentStatsPanel.setBorder(ui.whiteline);
+    equipmentStatsPanel.setLayout(new GridLayout(5,1));
+    ui.picturePanel.add(equipmentStatsPanel);
+    
+    equipmentStatsLabel = new JLabel("        ---Equipment Bonus---");
+    equipmentStatsLabel.setForeground(Color.yellow);
+    equipmentStatsLabel.setVisible(true);
+    equipmentStatsLabel.setFont(ui.statsFont);
+    equipmentStatsPanel.add(equipmentStatsLabel);
     
     equipmentButtons[0] = new JButton("Weapon:" + player.equippedItems[0].getName());
     equipmentButtons[0].setBackground(Color.black);
@@ -169,7 +199,7 @@ public class InventoryHandler implements ActionListener{
     equipmentButtons[0].setFont(ui.normalFont);
     equipmentButtons[0].setFocusPainted(false);
     equipmentButtons[0].addActionListener(this);
-    equipmentButtons[0].setActionCommand("inspectEquipment");
+    equipmentButtons[0].setActionCommand("inspectWeapon");
     equipmentButtons[0].setVisible(true);
     equipmentPanel.add(equipmentButtons[0]);
     
@@ -179,9 +209,21 @@ public class InventoryHandler implements ActionListener{
     equipmentButtons[1].setFont(ui.normalFont);
     equipmentButtons[1].setFocusPainted(false);
     equipmentButtons[1].addActionListener(this);
-    equipmentButtons[1].setActionCommand("inspectEquipment");
+    equipmentButtons[1].setActionCommand("inspectArmor");
     equipmentButtons[1].setVisible(true);
     equipmentPanel.add(equipmentButtons[1]);
+    
+    damageLabel = new JLabel("Damage:" + player.getCurrentWeapon().getDamageValue());
+    damageLabel.setForeground(Color.white);
+    damageLabel.setVisible(true);
+    damageLabel.setFont(ui.statsFont);
+    equipmentStatsPanel.add(damageLabel);
+    
+    armorLabel = new JLabel("Armor:" + player.getCurrentArmor().getArmorValue());
+    armorLabel.setForeground(Color.white);
+    armorLabel.setVisible(true);
+    armorLabel.setFont(ui.statsFont);
+    equipmentStatsPanel.add(armorLabel);
     
 
 
@@ -229,7 +271,12 @@ public class InventoryHandler implements ActionListener{
                 inventoryButton2.setText(player.inventoryItems[1].getName());
                 inventoryButton3.setText(player.inventoryItems[2].getName());
                 inventoryButton4.setText(player.inventoryItems[3].getName());
-                inventoryButton5.setText(player.inventoryItems[4].getName());               
+                inventoryButton5.setText(player.inventoryItems[4].getName());  
+                
+                player.setCurrentWeapon(player.equippedItems[0]);
+                player.setCurrentArmor(player.equippedItems[1]);
+                damageLabel.setText("Damage:" + player.getCurrentWeapon().getDamageValue());
+                armorLabel.setText("Armor:" + player.getCurrentArmor().getArmorValue());
               
                 // Check if slotNumber is valid for equipmentButtons array
                 if (slotNumber >= 0 && slotNumber < equipmentButtons.length) {
@@ -262,10 +309,13 @@ public class InventoryHandler implements ActionListener{
 		   	inventoryButton4.setText(player.inventoryItems[3].getName());
 		   	inventoryButton5.setText(player.inventoryItems[4].getName());
 		   	
-		   	for(int i = 0; i < player.equippedItems.length; i++) {
-		   	equipmentButtons[player.getPlayerEquipmentIndex()].setText(player.equippedItems[i].getName());
+            player.setCurrentWeapon(player.equippedItems[0]);
+            player.setCurrentArmor(player.equippedItems[1]);
+            damageLabel.setText("Damage:" + player.getCurrentWeapon().getDamageValue());
+            armorLabel.setText("Armor:" + player.getCurrentArmor().getArmorValue());
 		   	
-		   	}
+		   	equipmentButtons[0].setText("Weapon:" + player.equippedItems[0].getName());
+		   	equipmentButtons[1].setText("Armor:" + player.equippedItems[1].getName());
 		}
 			else if(player.inventoryItems[slotNumber] != player.empty) {
 				System.out.println("player inventory is full");
@@ -280,10 +330,13 @@ public class InventoryHandler implements ActionListener{
 		
 		switch(yourChoice) {
 		case "inventoryButton":
-			System.out.println("in inventory");
-			if(player.getInventoryStatus().equals("close")) {
+			System.out.println("attempting to access inventory...");
+			if(player.getInventoryStatus().equals("close") && player.getShopStatus().equals("close")) {
+				System.out.println("made it into inventory");
 				inventoryPanel.setVisible(true);
 				equipmentPanel.setVisible(true);
+				equipmentStatsPanel.setVisible(true);
+				ui.buttonPanel.setVisible(false);
 				
 				inventoryButton1.setText(player.inventoryItems[0].getName());
 				inventoryButton2.setText(player.inventoryItems[1].getName());
@@ -293,8 +346,17 @@ public class InventoryHandler implements ActionListener{
 				player.setInventoryStatus("open");
 			}
 			else if(player.getInventoryStatus().equals("open")) {
+				System.out.println("closing inventory");
 				inventoryPanel.setVisible(false);
 				equipmentPanel.setVisible(false);
+				equipmentStatsPanel.setVisible(false);
+		    	   itemHealingValue.setVisible(false);
+		    	   itemPriceLabel.setVisible(false);
+		           itemLabel.setVisible(false); // Hide item label after closing inventory
+		           equipmentDamageOrArmorValue.setVisible(false);
+		           useItemButton.setVisible(false); // Hide useItemButton after using the item
+		           closeItemButton.setVisible(false);
+				ui.buttonPanel.setVisible(true);
 				player.setInventoryStatus("close");
 			}
 			break;
@@ -312,8 +374,14 @@ public class InventoryHandler implements ActionListener{
 			itemHealingValue.setVisible(true);
 			itemPriceLabel.setVisible(true);
 			itemLabel.setVisible(true);
-			useItemButton.setText("Use:");
-			useItemButton.setActionCommand("useItem");
+			if(player.getShopStatus().equals("open")) {
+				useItemButton.setText("Sell");
+				useItemButton.setActionCommand("sellItem");
+			}else if(player.getShopStatus().equals("close")) {
+				useItemButton.setText("Use:");
+				useItemButton.setActionCommand("useItem");
+			}
+
 	        useItemButton.setVisible(true);
 	        closeItemButton.setVisible(true);
 	        player.setPlayerItemIndex(0);  
@@ -325,16 +393,21 @@ public class InventoryHandler implements ActionListener{
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
-					equipMentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
+					equipmentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
-						equipMentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
+						equipmentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
 						
 					}
 					itemPriceLabel.setVisible(true);
 					itemLabel.setVisible(true);
-					equipMentDamageOrArmorValue.setVisible(true);
-					useItemButton.setText("Equip:");
-					useItemButton.setActionCommand("equipItem");
+					equipmentDamageOrArmorValue.setVisible(true);
+					if(player.getShopStatus().equals("open")) {
+						useItemButton.setText("Sell");
+						useItemButton.setActionCommand("sellItem");
+					}else if(player.getShopStatus().equals("close")) {
+						useItemButton.setText("Equip:");
+						useItemButton.setActionCommand("equipItem");
+					}
 					useItemButton.setVisible(true);
 					closeItemButton.setVisible(true);
 					player.setPlayerItemIndex(0);  
@@ -357,8 +430,15 @@ public class InventoryHandler implements ActionListener{
 			itemHealingValue.setVisible(true);
 			itemPriceLabel.setVisible(true);
 			itemLabel.setVisible(true);
-			useItemButton.setText("Use:");
-			useItemButton.setActionCommand("useItem");
+			
+			if(player.getShopStatus().equals("open")) {
+				useItemButton.setText("Sell");
+				useItemButton.setActionCommand("sellItem");
+			}else if(player.getShopStatus().equals("close")) {
+				useItemButton.setText("Use:");
+				useItemButton.setActionCommand("useItem");
+			}
+			
 	        useItemButton.setVisible(true);
 	        closeItemButton.setVisible(true);
 	        player.setPlayerItemIndex(1);  
@@ -370,16 +450,21 @@ public class InventoryHandler implements ActionListener{
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
-					equipMentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
+					equipmentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
-						equipMentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
+						equipmentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
 						
 					}
 					itemPriceLabel.setVisible(true);
 					itemLabel.setVisible(true);
-					equipMentDamageOrArmorValue.setVisible(true);
-					useItemButton.setText("Equip:");
-					useItemButton.setActionCommand("equipItem");
+					equipmentDamageOrArmorValue.setVisible(true);
+					if(player.getShopStatus().equals("open")) {
+						useItemButton.setText("Sell");
+						useItemButton.setActionCommand("sellItem");
+					}else if(player.getShopStatus().equals("close")) {
+						useItemButton.setText("Equip:");
+						useItemButton.setActionCommand("equipItem");
+					}
 				    useItemButton.setVisible(true);
 				    closeItemButton.setVisible(true);
 				    player.setPlayerItemIndex(1);  
@@ -401,8 +486,13 @@ public class InventoryHandler implements ActionListener{
 			itemHealingValue.setVisible(true);
 			itemPriceLabel.setVisible(true);
 			itemLabel.setVisible(true);
-			useItemButton.setText("Use:");
-			useItemButton.setActionCommand("useItem");
+			if(player.getShopStatus().equals("open")) {
+				useItemButton.setText("Sell");
+				useItemButton.setActionCommand("sellItem");
+			}else if(player.getShopStatus().equals("close")) {
+				useItemButton.setText("Use:");
+				useItemButton.setActionCommand("useItem");
+			}
 	        useItemButton.setVisible(true);
 	        closeItemButton.setVisible(true);
 	        player.setPlayerItemIndex(2);  
@@ -414,16 +504,21 @@ public class InventoryHandler implements ActionListener{
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
-					equipMentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
+					equipmentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
-						equipMentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
+						equipmentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
 						
 					}
 					itemPriceLabel.setVisible(true);
 					itemLabel.setVisible(true);
-					equipMentDamageOrArmorValue.setVisible(true);
-					useItemButton.setText("Equip:");
-					useItemButton.setActionCommand("equipItem");
+					equipmentDamageOrArmorValue.setVisible(true);
+					if(player.getShopStatus().equals("open")) {
+						useItemButton.setText("Sell");
+						useItemButton.setActionCommand("sellItem");
+					}else if(player.getShopStatus().equals("close")) {
+						useItemButton.setText("Equip:");
+						useItemButton.setActionCommand("equipItem");
+					}
 				    useItemButton.setVisible(true);
 				    closeItemButton.setVisible(true);
 				    player.setPlayerItemIndex(2);  
@@ -447,8 +542,13 @@ public class InventoryHandler implements ActionListener{
 			itemHealingValue.setVisible(true);
 			itemPriceLabel.setVisible(true);
 			itemLabel.setVisible(true);
-			useItemButton.setText("Use:");
-			useItemButton.setActionCommand("useItem");
+			if(player.getShopStatus().equals("open")) {
+				useItemButton.setText("Sell");
+				useItemButton.setActionCommand("sellItem");
+			}else if(player.getShopStatus().equals("close")) {
+				useItemButton.setText("Use:");
+				useItemButton.setActionCommand("useItem");
+			}
 	        useItemButton.setVisible(true);
 	        closeItemButton.setVisible(true);
 	        player.setPlayerItemIndex(3);  
@@ -460,17 +560,22 @@ public class InventoryHandler implements ActionListener{
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
-					equipMentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
+					equipmentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
 					
 					} else if(superItem.getItemIndex() == 1) {
-						equipMentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
+						equipmentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
 						
 					}
 					itemPriceLabel.setVisible(true);
 					itemLabel.setVisible(true);
-					equipMentDamageOrArmorValue.setVisible(true);
-					useItemButton.setText("Equip:");
-					useItemButton.setActionCommand("equipItem");
+					equipmentDamageOrArmorValue.setVisible(true);
+					if(player.getShopStatus().equals("open")) {
+						useItemButton.setText("Sell");
+						useItemButton.setActionCommand("sellItem");
+					}else if(player.getShopStatus().equals("close")) {
+						useItemButton.setText("Equip:");
+						useItemButton.setActionCommand("equipItem");
+					}
 				    useItemButton.setVisible(true);
 				    closeItemButton.setVisible(true);
 				    player.setPlayerItemIndex(3);  
@@ -495,8 +600,13 @@ public class InventoryHandler implements ActionListener{
 			itemHealingValue.setVisible(true);
 			itemPriceLabel.setVisible(true);
 			itemLabel.setVisible(true);
-			useItemButton.setText("Use:");
-			useItemButton.setActionCommand("useItem");
+			if(player.getShopStatus().equals("open")) {
+				useItemButton.setText("Sell");
+				useItemButton.setActionCommand("sellItem");
+			}else if(player.getShopStatus().equals("close")) {
+				useItemButton.setText("Use:");
+				useItemButton.setActionCommand("useItem");
+			}
 	        useItemButton.setVisible(true);
 	        closeItemButton.setVisible(true);
 	        player.setPlayerItemIndex(4);  
@@ -508,16 +618,21 @@ public class InventoryHandler implements ActionListener{
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
-					equipMentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
+					equipmentDamageOrArmorValue.setText("Damage:" + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
-						equipMentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
+						equipmentDamageOrArmorValue.setText("Armor:" + superItem.getArmorValue());
 						
 					}
 					itemPriceLabel.setVisible(true);
 					itemLabel.setVisible(true);
-					equipMentDamageOrArmorValue.setVisible(true);
-					useItemButton.setText("Equip:");
-					useItemButton.setActionCommand("equipItem");
+					equipmentDamageOrArmorValue.setVisible(true);
+					if(player.getShopStatus().equals("open")) {
+						useItemButton.setText("Sell");
+						useItemButton.setActionCommand("sellItem");
+					}else if(player.getShopStatus().equals("close")) {
+						useItemButton.setText("Equip:");
+						useItemButton.setActionCommand("equipItem");
+					}
 				    useItemButton.setVisible(true);
 				    closeItemButton.setVisible(true);
 				    player.setPlayerItemIndex(4);  
@@ -538,7 +653,7 @@ public class InventoryHandler implements ActionListener{
                 itemHealingValue.setVisible(false);
                 itemPriceLabel.setVisible(false);
                 itemLabel.setVisible(false); // Hide item label after using the item
-                equipMentDamageOrArmorValue.setVisible(false);
+                equipmentDamageOrArmorValue.setVisible(false);
                 useItemButton.setVisible(false); // Hide useItemButton after using the item
                 closeItemButton.setVisible(false); // Hide closeItemButton after using the item
                 
@@ -561,7 +676,7 @@ public class InventoryHandler implements ActionListener{
                 itemHealingValue.setVisible(false);
                 itemPriceLabel.setVisible(false);
                 itemLabel.setVisible(false); // Hide item label after using the item
-                equipMentDamageOrArmorValue.setVisible(false);
+                equipmentDamageOrArmorValue.setVisible(false);
                 useItemButton.setVisible(false); // Hide useItemButton after using the item
                 closeItemButton.setVisible(false); // Hide closeItemButton after using the item
                 //debugging!
@@ -591,13 +706,13 @@ public class InventoryHandler implements ActionListener{
                 itemHealingValue.setVisible(false);
                 itemPriceLabel.setVisible(false);
                 itemLabel.setVisible(false); // Hide item label after using the item
-                equipMentDamageOrArmorValue.setVisible(false);
+                equipmentDamageOrArmorValue.setVisible(false);
                 useItemButton.setVisible(false); // Hide useItemButton after using the item
                 closeItemButton.setVisible(false); // Hide closeItemButton after using the item
                 //debugging!
-                System.out.println(player.getCurrentWeapon()+"!");
+                
         		for(int i = 0; i < player.equippedItems.length; i++) {
-        			System.out.println(player.equippedItems[i]);
+        			System.out.println("Equipment" + i + ":" + player.equippedItems[i].getName());
         		}
                 
             } else {
@@ -609,16 +724,17 @@ public class InventoryHandler implements ActionListener{
         	break;
         	
         	
-       case "inspectEquipment":
+       case "inspectWeapon":
     	   
-    	   System.out.println("Attempting to inspect equipment...");
+    	   System.out.println("Attempting to inspect weapon...");
     	  		   
     	   if (player.equippedItems[0].getEquipmentType().equals("Weapon")){
     		   
    			itemLabel.setText("Item:" + player.equippedItems[0].getName());
    			itemPriceLabel.setText("Price:" + player.equippedItems[0].getPrice());
      	   
- 			equipMentDamageOrArmorValue.setVisible(true);
+ 			equipmentDamageOrArmorValue.setVisible(true);
+ 			equipmentDamageOrArmorValue.setText("Damage:" + player.equippedItems[0].getDamageValue());
  			itemPriceLabel.setVisible(true);
  			itemLabel.setVisible(true);
  			useItemButton.setText("Unequip:");
@@ -628,27 +744,38 @@ public class InventoryHandler implements ActionListener{
  	        player.setPlayerEquipmentIndex(player.equippedItems[0].getItemIndex());
  	        
  	        System.out.println(player.getPlayerEquipmentIndex());
- 	        System.out.println("item found" + player.equippedItems[0].getName() + "222");
+ 	        System.out.println("item found" + player.equippedItems[0].getName());
   
-    	   } else if (player.equippedItems[1].getEquipmentType().equals("Armor")){
-    		   
-      			itemLabel.setText("Item:" + player.equippedItems[1].getName());
-       			itemPriceLabel.setText("Price:" + player.equippedItems[1].getPrice());
-         	   
-     			equipMentDamageOrArmorValue.setVisible(true);
-     			itemPriceLabel.setVisible(true);
-     			itemLabel.setVisible(true);
-     			useItemButton.setText("Unequip:");
-     			useItemButton.setActionCommand("unEquipItem");
-     	        useItemButton.setVisible(true);
-     	        closeItemButton.setVisible(true);
-     	       player.setPlayerEquipmentIndex(player.equippedItems[1].getItemIndex());
-     	        
-     	        System.out.println(player.getPlayerEquipmentIndex());
-     	        System.out.println("item found" + player.equippedItems[1] + "222");
-    		   
+    	   }else if(player.equippedItems[0].getName().equals("")){
+			System.out.println("no item selected");
+		}
+
+	        	
+			break;
 			
-		}else if(player.equippedItems[1].getName().equals("") || player.equippedItems[2].equals("") ){
+       case "inspectArmor":
+    	   
+    	   System.out.println("Attempting to inspect armor...");
+    	  		   
+    	   if (player.equippedItems[1].getEquipmentType().equals("Armor")){
+    		   
+   			itemLabel.setText("Item:" + player.equippedItems[1].getName());
+   			itemPriceLabel.setText("Price:" + player.equippedItems[1].getPrice());
+     	   
+ 			equipmentDamageOrArmorValue.setVisible(true);
+ 			equipmentDamageOrArmorValue.setText("Armor:" + player.equippedItems[1].getArmorValue());
+ 			itemPriceLabel.setVisible(true);
+ 			itemLabel.setVisible(true);
+ 			useItemButton.setText("Unequip:");
+ 			useItemButton.setActionCommand("unEquipItem");
+ 	        useItemButton.setVisible(true);
+ 	        closeItemButton.setVisible(true);
+ 	        player.setPlayerEquipmentIndex(player.equippedItems[1].getItemIndex());
+ 	        
+ 	        System.out.println(player.getPlayerEquipmentIndex());
+ 	        System.out.println("item found" + player.equippedItems[1].getName());
+  
+    	   }else if(player.equippedItems[1].getName().equals("")){
 			System.out.println("no item selected");
 		}
 
@@ -661,7 +788,7 @@ public class InventoryHandler implements ActionListener{
     	   itemHealingValue.setVisible(false);
     	   itemPriceLabel.setVisible(false);
            itemLabel.setVisible(false); // Hide item label after using the item
-           equipMentDamageOrArmorValue.setVisible(false);
+           equipmentDamageOrArmorValue.setVisible(false);
            useItemButton.setVisible(false); // Hide useItemButton after using the item
            closeItemButton.setVisible(false);
            player.setPlayerItemIndex(-1);

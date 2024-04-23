@@ -1,15 +1,17 @@
 package package01;
 
 import GameStates.GameState;
+import GameStates.TavernState;
 import package02.Armor_Cloth_Body;
 import package02.Weapon_Dagger;
 import package04.Item_Empty;
 import package04.Item_Orange;
 import package04.Item_Potion;
 import package04.SuperItem;
-public class Player {
-	public SuperItem currentWeapon; 
+public class Player { 
     private GameState currentState;
+    private SuperItem currentWeapon;
+    private SuperItem currentArmor;
     private int maxHp;
     private int currentHp;
     private int maxMp;
@@ -18,8 +20,11 @@ public class Player {
     private int currentExp;
     private int level;
     private int gold;
+    private int damage;
+    private int armor;
     private boolean playerAlive;
     private boolean inventoryFull;
+    private static String shopStatus;
     private static String inventoryStatus;
     private int playerItemIndex;
     private int playerEquipmentIndex;
@@ -34,23 +39,7 @@ public class Player {
 
     public Player( Game game) {
     	this.game = game;
- 
     	
-        level = 1;
-        maxHp = 10;
-        currentHp = maxHp;
-        maxMp = 10;
-        currentMp = maxMp;
-        currentExp = 0;
-        maxExp = level * 10;
-        gold = 0;
-        playerAlive = true;
-        currentWeapon = empty;
-        setInventoryFull(false);
-        inventoryStatus = "close";
-        setPlayerItemIndex(-1);
-        setPlayerItemIndex(-1);
-        
         equippedItems[0] = empty;
         equippedItems[1] = empty;
         equippedItems[2] = empty;
@@ -59,7 +48,34 @@ public class Player {
         inventoryItems[1] = orange;
         inventoryItems[2] = clothBody;
         inventoryItems[3] = dagger;
-        inventoryItems[4] = empty;
+        inventoryItems[4] = dagger;
+    	
+        currentWeapon = equippedItems[0];
+        currentArmor = equippedItems[1];
+        
+        level = 1;
+        maxHp = 10;
+        currentHp = maxHp;
+        maxMp = 10;
+        damage = currentWeapon.getDamageValue();
+        armor = currentArmor.getArmorValue();
+        currentMp = maxMp;
+        currentExp = 0;
+        maxExp = level * 10;
+        gold = 100;
+        playerAlive = true;
+        
+        
+        
+        inventoryStatus = "close";
+        shopStatus = "close";
+        
+        setPlayerItemIndex(-1);
+        setPlayerItemIndex(-1);
+        
+        
+        
+        
         
         
     }
@@ -134,7 +150,7 @@ public class Player {
     }
 
     public void setGold(int gold) {
-        this.gold = gold;
+        this.gold += gold;
     }
 
     public boolean isPlayerAlive() {
@@ -209,13 +225,6 @@ public class Player {
 		this.playerItemIndex = playerItemIndex;
 	}
 	
-	public void setCurrentWeapon(SuperItem superItem) {
-		this.currentWeapon = superItem;
-	}
-	
-	public String getCurrentWeapon() {
-		return currentWeapon.getName();
-	}
 
 
 
@@ -234,5 +243,67 @@ public class Player {
 	public void setPlayerEquipmentIndex(int playerEquipmentIndex) {
 		this.playerEquipmentIndex = playerEquipmentIndex;
 	}
+
+
+
+	public SuperItem getCurrentWeapon() {
+		return currentWeapon;
+	}
+
+
+
+	public void setCurrentWeapon(SuperItem currentWeapon) {
+		this.currentWeapon = currentWeapon;
+	}
+
+
+
+	public SuperItem getCurrentArmor() {
+		return currentArmor;
+	}
+
+
+
+	public void setCurrentArmor(SuperItem currentArmor) {
+		this.currentArmor = currentArmor;
+	}
+
+
+
+	public int getDamage() {
+		return damage;
+	}
+
+
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+
+
+	public int getArmor() {
+		return armor;
+	}
+
+
+
+	public void setArmor(int armor) {
+		this.armor = armor;
+	}
+
+
+
+	public String getShopStatus() {
+		return shopStatus;
+	}
+
+
+
+	public void setShopStatus(String string) {
+		Player.shopStatus = string;
+	}
+	
+	
 
 }

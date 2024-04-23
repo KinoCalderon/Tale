@@ -1,13 +1,14 @@
 package GameStates;
 
 import package01.Game;
+import package01.InventoryHandler;
 import package01.Player;
 import package01.UI;
 
 public class TitleScreenState extends GameState {
     
-    public TitleScreenState(Game game, Player player, UI ui) {
-        super(game, player, ui);
+    public TitleScreenState(Game game, Player player, UI ui, InventoryHandler iHandler) {
+        super(game, player, ui, iHandler);
     }
     
     @Override
@@ -18,7 +19,8 @@ public class TitleScreenState extends GameState {
        // pushGameState(this);
         // Set the player's current state to this state
         player.setCurrentState(this);
-        System.out.println(gameStateStack.peek());
+       
+        System.out.println(player.getCurrentState());
 
     }
 
@@ -30,10 +32,7 @@ public class TitleScreenState extends GameState {
         // Hide the main text, player, and choice button panels
                 
         // Add an action listener to the start button
-        ui.startButton.addActionListener(e -> {
-        	
-            // Create a new TownState and push it onto the game state stack
-        	pushStateAndSetCurrent(game.townState);
+        ui.startButton.addActionListener(e -> {pushStateAndSetCurrent(game.townState);
 
         });
     }

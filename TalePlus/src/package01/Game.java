@@ -11,9 +11,9 @@ public class Game {
 	public Player player  = new Player(this);
 	public UI ui = new UI(player); // create a new UI instance;
 	public InventoryHandler inventoryHandler = new InventoryHandler(player, ui);
-	public TitleScreenState titleScreenState = new TitleScreenState(this, player, ui);
-	public TownState townState = new TownState(this, player, ui);
-	public TavernState tavernState = new TavernState(this, player, ui);
+	public TitleScreenState titleScreenState = new TitleScreenState(this, player, ui, inventoryHandler);
+	public TownState townState = new TownState(this, player, ui, inventoryHandler);
+	public TavernState tavernState = new TavernState(this, player, ui, inventoryHandler);
 
 	public static void main(String[] args) {
 		
@@ -22,8 +22,10 @@ public class Game {
 	}	
 	
 	public Game() {
+		
 			GameState.setCurrentState(titleScreenState);
 			GameState.pushGameState(titleScreenState);
+			player.setCurrentState(gameState);
 		
 	
 			GameState.getCurrentState().update();
