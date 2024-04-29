@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/package01/PlayerStatsUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/TavernState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TavernState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/TownState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TownState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/InventoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package02/SuperWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/SuperWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/SuperItem.java" afterDir="false" />
-    </list>
+    <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="V.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,6 +66,15 @@
       <option name="presentableId" value="Default" />
       <updated>1714362871963</updated>
     </task>
+    <task id="LOCAL-00001" summary="V.1">
+      <option name="closed" value="true" />
+      <created>1714369512569</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1714369512569</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,5 +87,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="V.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="V.1" />
   </component>
 </project>
