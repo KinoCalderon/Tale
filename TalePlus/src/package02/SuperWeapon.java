@@ -13,3 +13,7 @@ public class SuperWeapon extends SuperItem {
 		this.damageValue = damageValue;
 	}
 }
+
+
+
+

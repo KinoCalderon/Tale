@@ -32,7 +32,7 @@ public class TitleScreenState extends GameState {
         // Hide the main text, player, and choice button panels
                 
         // Add an action listener to the start button
-        ui.startButton.addActionListener(e -> {pushStateAndSetCurrent(game.townState);
+        ui.startButton.addActionListener(e -> {pushStateAndSetCurrent(game.townState, player);
 
         });
     }

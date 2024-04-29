@@ -1,5 +1,6 @@
 package package01;
-
+//MAKE A GET INVENTORY FUNCTION THAT DISPLAYS THE PLAYERS INVO INFO TO THE UI UPDATE TEXT AREA
+//
 import GameStates.GameState;
 import GameStates.TavernState;
 import package02.Armor_Cloth_Body;
@@ -18,6 +19,8 @@ public class Player {
     private int currentMp;
     private int maxExp;
     private int currentExp;
+    private int strengthStat;
+    private int defenceStat;
     private int level;
     private int gold;
     private int damage;
@@ -28,6 +31,7 @@ public class Player {
     private static String inventoryStatus;
     private int playerItemIndex;
     private int playerEquipmentIndex;
+    private int playerInventoryIndex;
     public SuperItem[] equippedItems = new SuperItem[3];
     public Weapon_Dagger dagger = new Weapon_Dagger();
     public Armor_Cloth_Body clothBody = new Armor_Cloth_Body();
@@ -46,7 +50,7 @@ public class Player {
         
         inventoryItems[0] = potion;
         inventoryItems[1] = orange;
-        inventoryItems[2] = clothBody;
+        inventoryItems[2] = empty;
         inventoryItems[3] = dagger;
         inventoryItems[4] = dagger;
     	
@@ -57,26 +61,23 @@ public class Player {
         maxHp = 10;
         currentHp = maxHp;
         maxMp = 10;
+        currentMp = maxMp;
+        strengthStat = 1;
+        defenceStat = 1;
         damage = currentWeapon.getDamageValue();
         armor = currentArmor.getArmorValue();
-        currentMp = maxMp;
         currentExp = 0;
         maxExp = level * 10;
         gold = 100;
-        playerAlive = true;
-        
-        
-        
+        playerAlive = true;        
+                
         inventoryStatus = "close";
         shopStatus = "close";
         
         setPlayerItemIndex(-1);
-        setPlayerItemIndex(-1);
+        setPlayerInventoryIndex(-1);
         
-        
-        
-        
-        
+      
         
     }
     
@@ -84,6 +85,9 @@ public class Player {
     
     public  GameState getCurrentState() {
         return currentState;
+    }
+    public void setAbsoluteCurrentState() {
+    	currentState = GameState.getCurrentState();
     }
     public void setCurrentState(GameState state) {
         currentState = state;
@@ -201,18 +205,6 @@ public class Player {
 		Player.inventoryStatus = inventoryStatus;
 	}
 	
-	public boolean isInventoryFull() {
-		
-		for(int i = 0; i < inventoryItems.length; i++) {
-			if (inventoryItems[i] != this.empty) {
-				setInventoryFull(true);
-				}
-			else if(inventoryItems[i] == this.empty) {
-				setInventoryFull(false);
-			}
-		}
-		return inventoryFull;	
-	}
 		
 
 	public int getPlayerItemIndex() {
@@ -230,6 +222,11 @@ public class Player {
 
 	public boolean setInventoryFull(boolean inventoryFull) {
 		return this.inventoryFull = inventoryFull;
+	}
+	
+	public boolean getInventoryFull() {
+		
+		return inventoryFull;
 	}
 
 
@@ -303,7 +300,72 @@ public class Player {
 	public void setShopStatus(String string) {
 		Player.shopStatus = string;
 	}
+
+
+
+	public int getPlayerInventoryIndex() {
+		return playerInventoryIndex;
+	}
+
+
+
+	public void setPlayerInventoryIndex(int playerInventoryIndex) {
+		this.playerInventoryIndex = playerInventoryIndex;
+	}
+
+
+
+	public int getStrengthStat() {
+		return strengthStat;
+	}
+
+
+
+	public void setStrengthStat(int strengthStat) {
+		this.strengthStat = strengthStat;
+	}
+
+
+
+	public int getDefenceStat() {
+		return defenceStat;
+	}
+
+
+
+	public void setDefenceStat(int defenceStat) {
+		this.defenceStat = defenceStat;
+	}
 	
+	@Override
+	public String toString() {
+	    return "Player{" +
+	            "currentState=" + currentState +
+	            ", currentWeapon=" + currentWeapon.getName() +
+	            ", currentArmor=" + currentArmor.getName() +
+	            ", maxHp=" + maxHp +
+	            ", currentHp=" + currentHp +
+	            ", maxMp=" + maxMp +
+	            ", currentMp=" + currentMp +
+	            ", maxExp=" + maxExp +
+	            ", currentExp=" + currentExp +
+	            ", strengthStat=" + strengthStat +
+	            ", defenceStat=" + defenceStat +
+	            ", level=" + level +
+	            ", gold=" + gold +
+	            ", damage=" + getDamage() +
+	            ", armor=" + armor +
+	            ", playerAlive=" + playerAlive +
+	            ", inventoryFull=" + inventoryFull +
+	            ", shopStatus='" + shopStatus + '\'' +
+	            ", inventoryStatus='" + inventoryStatus + '\'' +
+	            ", playerItemIndex=" + playerItemIndex +
+	            ", playerEquipmentIndex=" + playerEquipmentIndex +
+	            ", playerInventoryIndex=" + playerInventoryIndex +
+	            '}';
+	}
+
+
 	
 
 }

@@ -14,8 +14,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+
+import GameStates.TownState;
 
 
 public class UI {
@@ -23,8 +27,9 @@ public class UI {
     Border raised = BorderFactory.createRaisedBevelBorder();
     Border whitetitle = BorderFactory.createCompoundBorder(raised, whiteline);
     public Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
-    public Font normalFont = new Font("Times New Roman", Font.PLAIN, 26);
-    public Font statsFont = new Font("Times New Roman", Font.PLAIN, 23);
+    public Font normalFont = new Font("Times New Roman", Font.PLAIN, 25);
+    public Font statsFont = new Font("Times New Roman", Font.PLAIN, 20);
+    public Font gameOutputFont = new Font("Italic", Font.ITALIC, 20);
    
     public JFrame frame;
     
@@ -36,13 +41,14 @@ public class UI {
     public JPanel buttonPanel;
     public JPanel picturePanel;
     public JPanel sellMessagePanel;
+    public JPanel gameOutputTextPanel;
     
     public JLabel pictureLabel;
 	public JLabel titleNameLabel;
 	
 	public JButton startButton ;
 	public JButton button1, button2, button3, button4;
-	public JButton closeSellItemMessage;
+	public JButton closeSellItemButton;
 	
 	public ImageIcon image;
 	public JLabel hpLabel, expLabel, levelLabel, goldLabel, mpLabel;
@@ -54,16 +60,21 @@ public class UI {
 	public JLabel equipmentDamageOrArmorValue;
 	public JButton buyItemButton;
 	public JButton closeItemButton;
+	public JButton playerStatsScreenButton;
 	
 	public JLabel soldItemMessage;
 	
 	
 	public Player player;
+	public Game game;
+	public JScrollPane scrollPane;
+	private JTextArea gameTextOutputArea;
 
 
 	
-	public UI (Player player) {
+	public UI (Player player, Game game) {
 		this.player = player;
+		this.game = game;
 	
 		
         // Main frame
@@ -115,7 +126,7 @@ public class UI {
         playerPanel.setPreferredSize(new Dimension(237, 130)); // reduced size to accommodate space for mappanel
         playerPanel.setBackground(Color.black);
         playerPanel.setBorder(whiteline);
-        playerPanel.setLayout(new GridLayout(3,2));
+        playerPanel.setLayout(new GridLayout(3,3));
         masterPlayerPanel.add(playerPanel);
         
         //PLAYER LABELS 
@@ -166,6 +177,8 @@ public class UI {
 		button1.setFont(normalFont);
 		button1.setFocusPainted(false);
 		button1.addActionListener(null);
+		button1.setActionCommand("tavernButton");
+		
 		buttonPanel.add(button1);
 		
         button2 = new JButton();
@@ -200,6 +213,7 @@ public class UI {
         infoPanel.setBackground(Color.black);
         infoPanel.setBorder(whiteline);
         infoPanel.setLayout(new GridLayout(4,2));
+        //infoPanel.setLayout(null);
         masterPlayerPanel.add(infoPanel);
         
 
@@ -209,20 +223,24 @@ public class UI {
         picturePanel.setLayout(null);
         picturePanel.setBounds(5, 1, 775, 420);
         picturePanel.setBackground(Color.black);
-        picturePanel.setVisible(true);
+        picturePanel.setBorder(whiteline);
         frame.add(picturePanel);
  
 
         // PICTURE LABEL AND IMAGE IMPORT
-        pictureLabel = new JLabel();
-        image = new ImageIcon(".//media//town.jpg");
-        pictureLabel.setIcon(image);
+        image = new ImageIcon("./media/town.jpg");
+        System.out.println("Image width: " + image.getIconWidth() + ", height: " + image.getIconHeight()); // Check image dimensions
+        pictureLabel = new JLabel(image);
+        pictureLabel.setBounds(0, 0, image.getIconWidth(), image.getIconHeight()); // Set label bounds to match image size
         picturePanel.add(pictureLabel);
         pictureLabel.setVisible(false);
+        System.out.println("Picture label added: " + pictureLabel.isVisible()); // Check if picture label is added and visible
+
+        
         
 	    shopKeeperPanel = new JPanel();
 	    shopKeeperPanel.setBounds(0, 1, 330, 410);
-	    shopKeeperPanel.setBackground(Color.blue);
+	    shopKeeperPanel.setBackground(Color.red);
 	    shopKeeperPanel.setVisible(false);
 	    shopKeeperPanel.setBorder(whiteline);
 	    shopKeeperPanel.setLayout(new GridLayout(5,1));
@@ -233,10 +251,18 @@ public class UI {
 	    shopButtons[0].setForeground(Color.white);
 	    shopButtons[0].setFont(normalFont);
 	    shopButtons[0].setFocusPainted(false);
-	    //shopButtons[0].addActionListener(this);
-	    shopButtons[0].setActionCommand("button1");
+	    shopButtons[0].setActionCommand("button0");
 	    shopButtons[0].setVisible(true);
 	    shopKeeperPanel.add(shopButtons[0]);
+	    
+	    shopButtons[1] = new JButton();
+	    shopButtons[1].setBackground(Color.black);
+	    shopButtons[1].setForeground(Color.white);
+	    shopButtons[1].setFont(normalFont);
+	    shopButtons[1].setFocusPainted(false);
+	    shopButtons[1].setActionCommand("button1");
+	    shopButtons[1].setVisible(true);
+	    shopKeeperPanel.add(shopButtons[1]);
 
 	    
 		itemLabel = new JLabel();
@@ -273,19 +299,6 @@ public class UI {
 	    infoPanel.add(buyItemButton);
 	    
 	    
-	    sellMessagePanel = new JPanel();
-	    sellMessagePanel.setPreferredSize(new Dimension(237, 130)); // reduced size to accommodate space for mappanel
-	    sellMessagePanel.setBackground(Color.black);
-	    sellMessagePanel.setBorder(whiteline);
-	    sellMessagePanel.setLayout(new GridLayout(2,1));
-	    sellMessagePanel.setVisible(false);
-        masterPlayerPanel.add(sellMessagePanel);
-	    
-	    soldItemMessage = new JLabel();
-	    soldItemMessage.setForeground(Color.white);
-	    soldItemMessage.setFont(normalFont);
-	    soldItemMessage.setVisible(true);
-	    sellMessagePanel.add(soldItemMessage);
 	    
 	    closeItemButton = new JButton("Close");
 	    closeItemButton.setBackground(Color.black);
@@ -296,20 +309,87 @@ public class UI {
 	    closeItemButton.setVisible(false);
 	    infoPanel.add(closeItemButton);
 	    
-	    closeSellItemMessage = new JButton("Close!");
-	    closeSellItemMessage.setBackground(Color.black);
-	    closeSellItemMessage.setForeground(Color.white);
-	    closeSellItemMessage.setFont(normalFont);
-	    closeSellItemMessage.setFocusPainted(false);    
-	    closeSellItemMessage.setActionCommand("closeItem");
-	    closeSellItemMessage.setVisible(true);
-	    sellMessagePanel.add(closeSellItemMessage);
-	    //infoPanel.add(soldItemMessage);
+	    
+	    //PLAYER STATS SCREEN BUTTON
+	    playerStatsScreenButton = new JButton("Stats");
+	    playerStatsScreenButton.setBackground(Color.black);
+	    playerStatsScreenButton.setForeground(Color.white);
+	    playerStatsScreenButton.setFont(normalFont);
+	    playerStatsScreenButton.setFocusPainted(false);    
+	    playerStatsScreenButton.setActionCommand("");
+	    playerStatsScreenButton.setVisible(true);
+	    
+	    gameOutputTextPanel = new JPanel();
+	    gameOutputTextPanel.setPreferredSize(new Dimension(237, 130)); // reduced size to accommodate space for mappanel
+	    gameOutputTextPanel.setBackground(Color.black);
+	    gameOutputTextPanel.setBorder(whiteline);
+	    gameOutputTextPanel.setLayout(null);
+        //masterPlayerPanel.add(gameOutputTextPanel);
+	    
+	    
+	 // Initialize JTextArea
+	    gameTextOutputArea = new JTextArea();
+	    gameTextOutputArea.setEditable(false); // Set text area as non-editable
+	    gameTextOutputArea.setLineWrap(true); // Enable line wrapping
+	    gameTextOutputArea.setWrapStyleWord(true); // Wrap at word boundaries
+	    gameTextOutputArea.setFont(gameOutputFont);
+	    gameTextOutputArea.setForeground(Color.white);
+	    gameTextOutputArea.setVisible(true);
+	    gameTextOutputArea.setBackground(Color.black);
+	    gameTextOutputArea.setBounds(5, 5, 290, 120);
 
-        
+	    // Initialize JScrollPane and add JTextArea to it
+	    scrollPane = new JScrollPane(gameTextOutputArea);
+	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); // Always show vertical scroll bar
+	    scrollPane.setBounds(5, 5, 320, 120); // Adjust bounds as needed
+	    scrollPane.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+	    
+	    // Add JScrollPane to infoPanel
+	    gameOutputTextPanel.add(scrollPane);
+	    infoPanel.setVisible(true);
 
+
+	    playerPanel.add(playerStatsScreenButton);
+	    
         frame.setVisible(true);
+        
 		
+	}
+	
+	public void RemoveInfoPanelAddOutputTextPanel() {
+		
+		masterPlayerPanel.remove(infoPanel);
+		masterPlayerPanel.add(gameOutputTextPanel);
+		masterPlayerPanel.repaint();
+		
+	}
+	
+	public void RemoveOutputTextPanelAddInfoPanel() {
+		
+		masterPlayerPanel.remove(gameOutputTextPanel);
+		masterPlayerPanel.add(infoPanel);
+		masterPlayerPanel.repaint();
+		
+	}
+	
+    public void updateTextArea(String newText) {
+        // Append the new text to the existing content with a newline separator
+        gameTextOutputArea.append(newText + "\n");
+
+        // Scroll down to show the newly appended text
+        gameTextOutputArea.setCaretPosition(gameTextOutputArea.getDocument().getLength());
+    }
+
+	
+	public void CloseItemUi() {
+		
+ 	   infoPanel.setVisible(true);
+ 	   itemHealingValue.setVisible(false);
+ 	   itemPriceLabel.setVisible(false);
+ 	   itemLabel.setVisible(false); // Hide item label after using the item
+ 	   equipmentDamageOrArmorValue.setVisible(false);
+ 	   buyItemButton.setVisible(false); // Hide useItemButton after using the item
+ 	   closeItemButton.setVisible(false);
 	}
 
 

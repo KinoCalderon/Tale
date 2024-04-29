@@ -53,8 +53,8 @@ public class SuperItem {
 	public String getEquipmentType() {
 		return equipmentType;
 	}
-	public void setEquipmentType(String equipmentType) {
-		this.equipmentType = equipmentType;
+	public void setEquipmentType(String string) {
+		this.equipmentType = string;
 	}
 
 }
