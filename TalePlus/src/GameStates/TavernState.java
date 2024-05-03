@@ -1,14 +1,7 @@
 package GameStates;
 
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import npc.TavernShopKeeper;
 import package01.Game;
@@ -22,7 +15,7 @@ import package04.SuperItem;
 
 public class TavernState extends GameState implements ActionListener{
 	
-	private TavernShopKeeper tavernShopKeeper = new TavernShopKeeper();
+	private final TavernShopKeeper tavernShopKeeper = new TavernShopKeeper();
 
 	
 	//private JButton shopButton1, shopButton2;
@@ -54,8 +47,8 @@ public class TavernState extends GameState implements ActionListener{
 
 	@Override
 	public void ui() {
-		// TODO Auto-generated method stub
-
+		//UPDATE THE PLAYERS LOCATION IN THE GAME OUTPUT AREA
+		ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
 		ui.shopKeeperPanel.setVisible(true);
 		iHandler.inventoryPanel.setVisible(true);
 		iHandler.inventoryButton1.setText(player.inventoryItems[0].getName());
@@ -102,7 +95,7 @@ public class TavernState extends GameState implements ActionListener{
 			
 			//ui.sellMessagePanel.setVisible(false);
 			System.out.println("shop button 1 pressed");
-			if(tavernShopKeeper.getShopItems(0).getName().equals("")) {	
+			if(tavernShopKeeper.getShopItems(0).getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -127,7 +120,7 @@ public class TavernState extends GameState implements ActionListener{
 
 			}	
 					else if (tavernShopKeeper.getShopItems(0).getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) tavernShopKeeper.getShopItems(0);
+					SuperItem superItem = tavernShopKeeper.getShopItems(0);
 					ui.itemLabel.setText("Item: " + superItem.getName());
 					ui.itemPriceLabel.setText("Price: " + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -159,7 +152,7 @@ public class TavernState extends GameState implements ActionListener{
 			
 			//ui.sellMessagePanel.setVisible(false);
 			System.out.println("shop button 1 pressed");
-			if(tavernShopKeeper.getShopItems(1).getName().equals("")) {	
+			if(tavernShopKeeper.getShopItems(1).getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -184,7 +177,7 @@ public class TavernState extends GameState implements ActionListener{
 
 			}	
 					else if (tavernShopKeeper.getShopItems(1).getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) tavernShopKeeper.getShopItems(1);
+					SuperItem superItem = tavernShopKeeper.getShopItems(1);
 					ui.itemLabel.setText("Item: " + superItem.getName());
 					ui.itemPriceLabel.setText("Price: " + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -234,13 +227,13 @@ public class TavernState extends GameState implements ActionListener{
 		   	iHandler.inventoryButton3.setText(player.inventoryItems[2].getName());
 		   	iHandler.inventoryButton4.setText(player.inventoryItems[3].getName());
 		   	iHandler.inventoryButton5.setText(player.inventoryItems[4].getName());
-		   	ui.RemoveInfoPanelAddOutputTextPanel();
-		   	ui.updateTextArea("Item bought " + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getName() 
-		   						+ " -" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "Gold.");
-		   	
+				ui.RemoveInfoPanelAddOutputTextPanel();
+				ui.updateGameTextOutputArea("Item bought " + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getName()
+						+ " -" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "Gold.");
+
 			} else {			
 					ui.RemoveInfoPanelAddOutputTextPanel();
-					ui.updateTextArea("Can't buy item");
+					ui.updateGameTextOutputArea("Can't buy item");
 			System.out.println("out of gold or invo full*");
 				
 			}{System.out.println("end of buyItem case check");

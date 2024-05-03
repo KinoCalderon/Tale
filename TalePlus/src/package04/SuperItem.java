@@ -9,6 +9,7 @@ public class SuperItem {
 	private int damageValue;
 	private int armorValue;
 	private String equipmentType;
+
 	
 	
 	public String getName() {
@@ -22,9 +23,6 @@ public class SuperItem {
 	}
 	public String getType() {
 		return type;
-	}
-	public String determineItemType() {
-		return this.getClass().getSimpleName();
 	}
 	public int getPrice() {
 		return price;

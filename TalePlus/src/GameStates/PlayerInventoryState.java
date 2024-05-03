@@ -38,7 +38,7 @@ public class PlayerInventoryState extends GameState implements ActionListener {
 	@Override
 	public void ui() {
 		// TODO Auto-generated method stub
-		ui.updateTextArea("Welcome to " + player.getCurrentState().getName());
+		ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
 		ui.button1.setVisible(false);
 		ui.button4.setVisible(true);
 		ui.button4.removeActionListener(iHandler);

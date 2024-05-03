@@ -1,10 +1,8 @@
 package GameStates;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import npc.TavernShopKeeper;
 import package01.Game;
 import package01.InventoryHandler;
 import package01.Player;
@@ -30,7 +28,7 @@ public class TownState extends GameState implements ActionListener{
     public void ui() {
         // Update the player's game screen and UI
     	ui.RemoveInfoPanelAddOutputTextPanel();
-    	ui.updateTextArea("Welcome to " + player.getCurrentState().getName());
+    	ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
     	ui.shopKeeperPanel.setVisible(false);
     	iHandler.CloseInventoryHandlerUi();
     	

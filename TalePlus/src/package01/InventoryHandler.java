@@ -18,7 +18,6 @@ public class InventoryHandler implements ActionListener{
 	public UI ui;
 	public Game game;
 	public JButton[] equipmentButtons = new JButton[2];
-	public JButton equipmentButton1, equipmentButton2;
 	public JButton inventoryButton, inventoryButton1, inventoryButton2, inventoryButton3, inventoryButton4, inventoryButton5;
     public JButton useItemButton;
     public JButton closeItemButton;
@@ -32,7 +31,7 @@ public class InventoryHandler implements ActionListener{
 	public JLabel equipmentStatsLabel, equipmentLabel, inventoryLabel;
 	public JPanel equipmentPanel;
 	public JPanel equipmentStatsPanel;
-	InventoryManager inventoryManager = new InventoryManager();
+
 	
 	public InventoryHandler(Player player, UI ui, Game game) {	
 	this.player = player;
@@ -226,20 +225,29 @@ public class InventoryHandler implements ActionListener{
     equipmentStatsPanel.add(armorLabel);
     
 
-
-	
 	}
-    
 
     public void itemUsed(int slotNumber) {
     	//set the item used = to a temporary SuperItem variable
     	SuperItem currentItem = player.inventoryItems[slotNumber];
    	 	//check to see if the current item used is a Consumable
-    	if(currentItem instanceof SuperConsumable) {
+    	if(currentItem instanceof SuperConsumable consumableItem) {
     			//set the current item used = a SuperConsumable, consumable Item 
-    			SuperConsumable consumableItem = (SuperConsumable) currentItem;
-    		
-    			player.healPlayer(consumableItem.getHealingValue());
+
+
+				if (consumableItem.getHealingValue() > 0){
+
+					ui.updateGameTextOutputArea("Player used: " + consumableItem.getName() + " +"
+											   + consumableItem.getHealingValue() + consumableItem.getConsumableType());
+					ui.RemoveInfoPanelAddOutputTextPanel();
+				} else if (consumableItem.getHealingValue() < 0) {
+
+					ui.updateGameTextOutputArea("Player used: " + consumableItem.getName() +" "
+							+ consumableItem.getHealingValue() + consumableItem.getConsumableType());
+					ui.RemoveInfoPanelAddOutputTextPanel();
+				}
+
+			player.healPlayer(consumableItem.getHealingValue());
 			   	ui.hpLabel.setText(" HP: " + player.getCurrentHp() + "/" + player.getMaxHp());
 			   	 
 			   	player.inventoryItems[slotNumber] = player.empty;
@@ -262,36 +270,39 @@ public class InventoryHandler implements ActionListener{
             //check to see if the current item is used is an equip
             if (currentItem instanceof SuperItem) {
                 //set the current item used = to a SuperWeapon superWeapon
-                SuperItem superItem = (SuperItem) currentItem;
-                
-                player.inventoryItems[player.getPlayerItemIndex()] = player.equippedItems[superItem.getItemIndex()];
-                player.equippedItems[superItem.getItemIndex()] = superItem;
-                ui.updateTextArea("Player equipped item: " + superItem.getName());
+
+
+                player.inventoryItems[player.getPlayerItemIndex()] = player.equippedItems[currentItem.getItemIndex()];
+                player.equippedItems[currentItem.getItemIndex()] = currentItem;
+                ui.updateGameTextOutputArea("Player equipped item: " + currentItem.getName());
                 ui.RemoveInfoPanelAddOutputTextPanel();
 
                 inventoryButton1.setText(player.inventoryItems[0].getName());
                 inventoryButton2.setText(player.inventoryItems[1].getName());
                 inventoryButton3.setText(player.inventoryItems[2].getName());
                 inventoryButton4.setText(player.inventoryItems[3].getName());
-                inventoryButton5.setText(player.inventoryItems[4].getName());  
-                
+                inventoryButton5.setText(player.inventoryItems[4].getName());
+
                 player.setCurrentWeapon(player.equippedItems[0]);
                 player.setCurrentArmor(player.equippedItems[1]);
                 damageLabel.setText("Damage:" + player.getCurrentWeapon().getDamageValue());
                 armorLabel.setText("Armor:" + player.getCurrentArmor().getArmorValue());
                 player.setDamage(player.equippedItems[0].getDamageValue());
                 player.setArmor(player.equippedItems[1].getArmorValue());
-              
+
                 // Check if slotNumber is valid for equipmentButtons array
                 if (slotNumber >= 0 && slotNumber < equipmentButtons.length) {
-                    equipmentButtons[slotNumber].setText(superItem.getEquipmentType() + ":" + player.equippedItems[slotNumber].getName());
-                } else {
+                    equipmentButtons[slotNumber].setText(currentItem.getEquipmentType() + ":" + player.equippedItems[slotNumber].getName());
+                }
+				else {
                     System.out.println("Invalid slot number for equipment buttons array.");
                 }
-            } else {
+            }
+			else {
                 System.out.println("No item found");
             }
-        } else {
+        }
+		else {
             System.out.println("Invalid slot number");
         }
     }
@@ -306,7 +317,7 @@ public class InventoryHandler implements ActionListener{
 		if(player.inventoryItems[slotNumber] == player.empty) {
 			player.inventoryItems[slotNumber] = player.equippedItems[item.getItemIndex()];
 			player.equippedItems[item.getItemIndex()] = player.empty;
-			ui.updateTextArea("Player unequipped item: " + item.getName());
+			ui.updateGameTextOutputArea("Player unequipped item: " + item.getName());
             ui.RemoveInfoPanelAddOutputTextPanel();
 			
 		   	inventoryButton1.setText(player.inventoryItems[0].getName());
@@ -400,7 +411,7 @@ public class InventoryHandler implements ActionListener{
 			
 		case "item1":
 			player.setPlayerInventoryIndex(0);
-			if(player.inventoryItems[0].getName().equals("")) {	
+			if(player.inventoryItems[0].getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -431,7 +442,7 @@ public class InventoryHandler implements ActionListener{
 
 			}	
 					else if (player.inventoryItems[0].getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) player.inventoryItems[0];
+					SuperItem superItem = player.inventoryItems[0];
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -466,7 +477,7 @@ public class InventoryHandler implements ActionListener{
 			
 		case "item2":
 			player.setPlayerInventoryIndex(1);
-			if(player.inventoryItems[1].getName().equals("")) {	
+			if(player.inventoryItems[1].getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -497,7 +508,7 @@ public class InventoryHandler implements ActionListener{
 
 			}	
 					else if (player.inventoryItems[1].getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) player.inventoryItems[1];
+					SuperItem superItem = player.inventoryItems[1];
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -532,7 +543,7 @@ public class InventoryHandler implements ActionListener{
 			
 		case "item3":
 			player.setPlayerInventoryIndex(2);
-			if(player.inventoryItems[2].getName().equals("")) {	
+			if(player.inventoryItems[2].getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			else if(player.inventoryItems[2].getType().equals("Consumable")) {
@@ -561,7 +572,7 @@ public class InventoryHandler implements ActionListener{
 	        
 			}	
 					else if (player.inventoryItems[2].getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) player.inventoryItems[2];
+					SuperItem superItem = player.inventoryItems[2];
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -596,7 +607,7 @@ public class InventoryHandler implements ActionListener{
 			
 		case "item4":
 			player.setPlayerInventoryIndex(3);
-			if(player.inventoryItems[3].getName().equals("")) {
+			if(player.inventoryItems[3].getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -626,7 +637,7 @@ public class InventoryHandler implements ActionListener{
 
 			}	
 					else if (player.inventoryItems[3].getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) player.inventoryItems[3];
+					SuperItem superItem = player.inventoryItems[3];
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -663,7 +674,7 @@ public class InventoryHandler implements ActionListener{
 			
 		case "item5":
 			player.setPlayerInventoryIndex(4);
-			if(player.inventoryItems[4].getName().equals("")) {	
+			if(player.inventoryItems[4].getName().isEmpty()) {
 				System.out.println("no item here sorry");
 			}
 			
@@ -693,7 +704,7 @@ public class InventoryHandler implements ActionListener{
 
 			}
 					else if (player.inventoryItems[4].getType().equals("Equipment")) {
-					SuperItem superItem = (SuperItem) player.inventoryItems[4];
+					SuperItem superItem = player.inventoryItems[4];
 					itemLabel.setText("Item:" + superItem.getName());
 					itemPriceLabel.setText("Price:" + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
@@ -727,7 +738,7 @@ public class InventoryHandler implements ActionListener{
 			break;
 			
 		case "sellItem":
-			ui.updateTextArea("Sold a "+ player.inventoryItems[player.getPlayerInventoryIndex()].getName() + " for " + 
+			ui.updateGameTextOutputArea("Sold a "+ player.inventoryItems[player.getPlayerInventoryIndex()].getName() + " for " +
 			player.inventoryItems[player.getPlayerInventoryIndex()].getPrice() + "Gold.");
 			System.out.println("inside sellitem case check*");
 			
@@ -881,9 +892,9 @@ public class InventoryHandler implements ActionListener{
  	        System.out.println(player.getPlayerEquipmentIndex());
  	        System.out.println("item found" + player.equippedItems[0].getName());
   
-    	   }else if(player.equippedItems[0].getName().equals("")){
+    	   }else if(player.equippedItems[0].getName().isEmpty()){
     		    ui.RemoveInfoPanelAddOutputTextPanel();
-       			ui.updateTextArea("No item to select");
+       			ui.updateGameTextOutputArea("No item to select");
        			System.out.println("no item selected");
 		}
 
@@ -915,9 +926,9 @@ public class InventoryHandler implements ActionListener{
  	        System.out.println(player.getPlayerEquipmentIndex());
  	        System.out.println("item found*" + player.equippedItems[1].getName());
   
-    	   }else if(player.equippedItems[1].getName().equals("")){
+    	   }else if(player.equippedItems[1].getName().isEmpty()){
     		   ui.RemoveInfoPanelAddOutputTextPanel();
-    		   ui.updateTextArea("No item to select");
+    		   ui.updateGameTextOutputArea("No item to select");
     		   System.out.println("no item selected");
 		}
 
@@ -927,7 +938,7 @@ public class InventoryHandler implements ActionListener{
             
        case "closeItem":
     	   ui.RemoveInfoPanelAddOutputTextPanel();
-    	   ui.updateTextArea("closed item");
+    	   ui.updateGameTextOutputArea("closed item");
     	   ui.infoPanel.setVisible(true);
     	   itemHealingValue.setVisible(false);
     	   itemPriceLabel.setVisible(false);

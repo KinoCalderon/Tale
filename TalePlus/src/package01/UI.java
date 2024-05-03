@@ -1,11 +1,8 @@
 package package01;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,18 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
-import GameStates.TownState;
-
 
 public class UI {
     public Border whiteline = BorderFactory.createLineBorder(Color.white);
-    Border raised = BorderFactory.createRaisedBevelBorder();
-    Border whitetitle = BorderFactory.createCompoundBorder(raised, whiteline);
     public Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
     public Font normalFont = new Font("Times New Roman", Font.PLAIN, 25);
     public Font statsFont = new Font("Times New Roman", Font.PLAIN, 20);
@@ -48,7 +40,6 @@ public class UI {
 	
 	public JButton startButton ;
 	public JButton button1, button2, button3, button4;
-	public JButton closeSellItemButton;
 	
 	public ImageIcon image;
 	public JLabel hpLabel, expLabel, levelLabel, goldLabel, mpLabel;
@@ -68,7 +59,7 @@ public class UI {
 	public Player player;
 	public Game game;
 	public JScrollPane scrollPane;
-	private JTextArea gameTextOutputArea;
+	private final JTextArea gameTextOutputArea;
 
 
 	
@@ -224,6 +215,7 @@ public class UI {
         picturePanel.setBounds(5, 1, 775, 420);
         picturePanel.setBackground(Color.black);
         picturePanel.setBorder(whiteline);
+		picturePanel.setVisible(false);
         frame.add(picturePanel);
  
 
@@ -240,7 +232,7 @@ public class UI {
         
 	    shopKeeperPanel = new JPanel();
 	    shopKeeperPanel.setBounds(0, 1, 330, 410);
-	    shopKeeperPanel.setBackground(Color.red);
+	    shopKeeperPanel.setBackground(Color.black);
 	    shopKeeperPanel.setVisible(false);
 	    shopKeeperPanel.setBorder(whiteline);
 	    shopKeeperPanel.setLayout(new GridLayout(5,1));
@@ -372,7 +364,7 @@ public class UI {
 		
 	}
 	
-    public void updateTextArea(String newText) {
+    public void updateGameTextOutputArea(String newText) {
         // Append the new text to the existing content with a newline separator
         gameTextOutputArea.append(newText + "\n");
 

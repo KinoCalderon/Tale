@@ -7,6 +7,7 @@ public class Item_Orange extends SuperConsumable{
 		setName("Orange");
 		setHealingValue(-2);
 		setType("Consumable");
+		setConsumableType("Hp");
 		setPrice(1);
 	}
 

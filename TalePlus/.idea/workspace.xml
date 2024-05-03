@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="V.1" />
+    <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="V.1&#10;changed tavernsState switch case statement from .equals(&quot;&quot;) to .isempty() on line 98&#10;changed tavernStates button0 case and removed superitem cast from line 123 &amp; 180&#10;changed line 155 .isequals to .isempty&#10;removed a determinetype method from superitem&#10;&#10;inventoryHnadler - removed equipbutton1-2 and inventorymanager from fields&#10;&#10;removed this code &quot;SuperConsumable consumableItem = (SuperConsumable) currentItem;&quot; from line 236 and put the consumableItem cast inside of the instace of if statement&#10;line 273 removed superItem cast to superitem because its already SuperItem superItem&#10;line 411 removed - isequals added .isempty&#10;line 442 removed - super item casting from statement">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameStates/TavernState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TavernState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameStates/TownState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TownState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/InventoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Item_Orange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Item_Orange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Item_Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Item_Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/SuperConsumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/SuperConsumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/SuperItem.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,7 +39,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
-    "url": "https://github.com/KinoCal/TaleV1.git",
+    "url": "https://github.com/KinoCalderon/Tale.git",
     "accountId": "f1889dc9-20ac-4850-ab8d-195ac22f6cfa"
   }
 }]]></component>
@@ -43,20 +54,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Game.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "vcs.Git"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Game.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\git\TaleRpg\TalePlus\src\GameStates" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Game" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="package01.Game" />
+      <module name="TalePlus" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,7 +99,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714369512569</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="V.1">
+      <option name="closed" value="true" />
+      <created>1714369665809</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714369665809</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -90,6 +123,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="V.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="V.1" />
+    <MESSAGE value="V.1&#10;changed tavernsState switch case statement from .equals(&quot;&quot;) to .isempty() on line 98&#10;changed tavernStates button0 case and removed superitem cast from line 123 &amp; 180&#10;changed line 155 .isequals to .isempty&#10;removed a determinetype method from superitem&#10;&#10;inventoryHnadler - removed equipbutton1-2 and inventorymanager from fields&#10;&#10;removed this code &quot;SuperConsumable consumableItem = (SuperConsumable) currentItem;&quot; from line 236 and put the consumableItem cast inside of the instace of if statement&#10;line 273 removed superItem cast to superitem because its already SuperItem superItem&#10;line 411 removed - isequals added .isempty&#10;line 442 removed - super item casting from statement" />
+    <option name="LAST_COMMIT_MESSAGE" value="V.1&#10;changed tavernsState switch case statement from .equals(&quot;&quot;) to .isempty() on line 98&#10;changed tavernStates button0 case and removed superitem cast from line 123 &amp; 180&#10;changed line 155 .isequals to .isempty&#10;removed a determinetype method from superitem&#10;&#10;inventoryHnadler - removed equipbutton1-2 and inventorymanager from fields&#10;&#10;removed this code &quot;SuperConsumable consumableItem = (SuperConsumable) currentItem;&quot; from line 236 and put the consumableItem cast inside of the instace of if statement&#10;line 273 removed superItem cast to superitem because its already SuperItem superItem&#10;line 411 removed - isequals added .isempty&#10;line 442 removed - super item casting from statement" />
   </component>
 </project>

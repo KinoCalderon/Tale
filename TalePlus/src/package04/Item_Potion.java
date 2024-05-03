@@ -6,6 +6,7 @@ public class Item_Potion extends SuperConsumable{
 		setName("Potion");
 		setHealingValue(10);
 		setType("Consumable");
+		setConsumableType("Hp");
 		setPrice(3);
 	}
 
