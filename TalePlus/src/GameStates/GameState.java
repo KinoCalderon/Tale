@@ -17,6 +17,7 @@ public abstract class GameState {
     protected Game game;
     protected Player player;
     protected UI ui;
+    protected InventoryUI invoUI;
     protected InventoryHandler iHandler;
     protected PlayerStatsUI playerStatsUI;
     
@@ -24,24 +25,31 @@ public abstract class GameState {
     
 
 
-    public GameState(Game game,Player player,UI ui, InventoryHandler iHandler) {
+    public GameState(Game game,Player player,UI ui, InventoryUI invoUI) {
         this.game = game;
         this.player = player;
         this.ui = ui;
-        this.iHandler = iHandler;
+        this.invoUI = invoUI;
         
     }
 
-    public GameState(Game game2, Player player2, UI ui2, InventoryHandler iHandler2, PlayerStatsUI playerStatsUI) {
+    public GameState(Game game2, Player player2, UI ui2, InventoryUI invoUI2, PlayerStatsUI playerStatsUI) {
     	this.game = game2;
     	this.player = player2;
     	this.ui = ui2;
-    	this.iHandler = iHandler2;
+    	this.invoUI = invoUI2;
     	this.playerStatsUI = playerStatsUI;
 		// TODO Auto-generated constructor stub
 	}
 
-	// Method to update the game state
+    public GameState(Game game, Player player, UI ui, InventoryUI invoUI, InventoryHandler iHandler) {
+        this.game = game;
+        this.player = player;
+        this.invoUI = invoUI;
+        this.ui = ui;
+    }
+
+    // Method to update the game state
     public abstract void update();
 
     // Method to update the user interface
@@ -49,34 +57,7 @@ public abstract class GameState {
 
     // Method to play sound effects
     abstract void sound();
-    
-    public static <T> GameState getGameStateAtIndex( int index) {
-        if (index >= gameStateStack.size() || index < -gameStateStack.size()) {
-            throw new IndexOutOfBoundsException("Index out of bounds");
-        }
 
-        if (index < 0) {
-            index += gameStateStack.size();
-        }
-
-        // Temporary stack to hold elements popped from the original stack
-        Stack<T> tempStack = new Stack<>();
-
-        // Pop elements from the original stack until reaching the desired index
-        for (int i = 0; i < index; i++) {
-            tempStack.push((T) gameStateStack.pop());
-        }
-
-        // Get the element at the desired index
-        GameState element = gameStateStack.peek();
-
-        // Restore the original stack by pushing back elements from the temporary stack
-        while (!tempStack.isEmpty()) {
-            gameStateStack.push((GameState) tempStack.pop());
-        }
-
-        return element;
-    }
     
     // Method to push and set the current state; call it's methods
     public static void pushStateAndSetCurrent(GameState state, Player player) {

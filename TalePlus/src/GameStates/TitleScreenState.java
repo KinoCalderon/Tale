@@ -1,14 +1,11 @@
 package GameStates;
 
-import package01.Game;
-import package01.InventoryHandler;
-import package01.Player;
-import package01.UI;
+import package01.*;
 
 public class TitleScreenState extends GameState {
     
-    public TitleScreenState(Game game, Player player, UI ui, InventoryHandler iHandler) {
-        super(game, player, ui, iHandler);
+    public TitleScreenState(Game game, Player player, UI ui, InventoryUI invoUI) {
+        super(game, player, ui, invoUI);
     }
     
     @Override
@@ -32,13 +29,15 @@ public class TitleScreenState extends GameState {
         // Hide the main text, player, and choice button panels
                 
         // Add an action listener to the start button
-        ui.startButton.addActionListener(e -> {pushStateAndSetCurrent(game.townState, player);
-
-        });
+        ui.startButton.addActionListener(e -> pushStateAndSetCurrent(game.townState, player));
     }
 
     @Override
-    public void sound() {
-        // TODO Auto-generated method stub
+    void sound() {
+
     }
+
 }
+
+
+

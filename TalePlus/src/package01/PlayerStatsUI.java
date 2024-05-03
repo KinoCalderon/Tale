@@ -46,7 +46,7 @@ public class PlayerStatsUI {
         playerDefStatLabel.setFont(ui.statsFont);
         playerStatsPanel.add(playerDefStatLabel); // Add the label
 
-        ui.picturePanel.add(playerStatsPanel); // Add the panel to the UI
+        ui.picturePane.add(playerStatsPanel); // Add the panel to the UI
     }
     
     public void ClosePlayerStatsUI() {

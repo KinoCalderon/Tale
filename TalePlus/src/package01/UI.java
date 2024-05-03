@@ -4,15 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.border.Border;
 
 
@@ -31,7 +23,8 @@ public class UI {
     public JPanel playerPanel;
     public JPanel infoPanel;
     public JPanel buttonPanel;
-    public JPanel picturePanel;
+    //public JPanel picturePanel;
+	public JLayeredPane picturePane;
     public JPanel sellMessagePanel;
     public JPanel gameOutputTextPanel;
     
@@ -210,13 +203,13 @@ public class UI {
 
         
         // MAIN PANEL THAT TAKES UP THE REST OF THE SCREEN
-        picturePanel = new JPanel();
-        picturePanel.setLayout(null);
-        picturePanel.setBounds(5, 1, 775, 420);
-        picturePanel.setBackground(Color.black);
-        picturePanel.setBorder(whiteline);
-		picturePanel.setVisible(false);
-        frame.add(picturePanel);
+        picturePane = new JLayeredPane();
+        picturePane.setLayout(null);
+        picturePane.setBounds(5, 1, 775, 420);
+        picturePane.setBackground(Color.black);
+        picturePane.setBorder(whiteline);
+		picturePane.setVisible(false);
+        frame.add(picturePane);
  
 
         // PICTURE LABEL AND IMAGE IMPORT
@@ -224,7 +217,7 @@ public class UI {
         System.out.println("Image width: " + image.getIconWidth() + ", height: " + image.getIconHeight()); // Check image dimensions
         pictureLabel = new JLabel(image);
         pictureLabel.setBounds(0, 0, image.getIconWidth(), image.getIconHeight()); // Set label bounds to match image size
-        picturePanel.add(pictureLabel);
+        picturePane.add(pictureLabel);
         pictureLabel.setVisible(false);
         System.out.println("Picture label added: " + pictureLabel.isVisible()); // Check if picture label is added and visible
 
@@ -236,7 +229,7 @@ public class UI {
 	    shopKeeperPanel.setVisible(false);
 	    shopKeeperPanel.setBorder(whiteline);
 	    shopKeeperPanel.setLayout(new GridLayout(5,1));
-	    picturePanel.add(shopKeeperPanel);
+	    picturePane.add(shopKeeperPanel);
 	    
 	    shopButtons[0] = new JButton();
 	    shopButtons[0].setBackground(Color.black);

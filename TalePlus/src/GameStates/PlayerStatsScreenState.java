@@ -2,16 +2,12 @@ package GameStates;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import package01.Game;
-import package01.InventoryHandler;
-import package01.Player;
-import package01.UI;
-import package01.PlayerStatsUI;
+import package01.*;
 
 public class PlayerStatsScreenState extends GameState implements ActionListener {
 
-	public PlayerStatsScreenState(Game game, Player player, UI ui, InventoryHandler iHandler, PlayerStatsUI playerStatsUI) {
-		super(game, player, ui, iHandler, playerStatsUI);
+	public PlayerStatsScreenState(Game game, Player player, UI ui, InventoryUI invoUI, PlayerStatsUI playerStatsUI) {
+		super(game, player, ui, invoUI, playerStatsUI);
 		setName("PlayerStatsState");
 		// TODO Auto-generated constructor stub
 	}

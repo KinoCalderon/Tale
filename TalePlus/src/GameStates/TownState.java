@@ -3,15 +3,12 @@ package GameStates;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import package01.Game;
-import package01.InventoryHandler;
-import package01.Player;
-import package01.UI;
+import package01.*;
 
 public class TownState extends GameState implements ActionListener{
 
-    public TownState(Game game, Player player, UI ui, InventoryHandler iHandler) {
-        super(game, player, ui, iHandler);
+    public TownState(Game game, Player player, UI ui, InventoryUI invoUI) {
+        super(game, player, ui, invoUI);
         setName("TownState");
         
     }
@@ -30,7 +27,7 @@ public class TownState extends GameState implements ActionListener{
     	ui.RemoveInfoPanelAddOutputTextPanel();
     	ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
     	ui.shopKeeperPanel.setVisible(false);
-    	iHandler.CloseInventoryHandlerUi();
+    	invoUI.CloseInventoryUI();
     	
     	ui.button1.setVisible(true);
     	ui.button1.setText("Tavern");
@@ -54,21 +51,21 @@ public class TownState extends GameState implements ActionListener{
         
         // Show the game screen 
         //ui.picturePanel.setLayout(new BorderLayout());
-    	ui.picturePanel.setVisible(true);
+    	ui.picturePane.setVisible(true);
         ui.pictureLabel.setVisible(false);
         ui.buttonPanel.setVisible(true);
         ui.masterPlayerPanel.setVisible(true);
         
         //hide potential left open panels
-        iHandler.equipmentPanel.setVisible(false);
-        iHandler.equipmentStatsPanel.setVisible(false);
-        iHandler.inventoryPanel.setVisible(false);
-        iHandler.itemHealingValue.setVisible(false);
-        iHandler.itemPriceLabel.setVisible(false);
-        iHandler.itemLabel.setVisible(false); // Hide item label after using the item
-        iHandler.equipmentDamageOrArmorValue.setVisible(false);
-        iHandler.useItemButton.setVisible(false); // Hide useItemButton after using the item
-        iHandler.closeItemButton.setVisible(false);
+        invoUI.equipmentPanel.setVisible(false);
+        invoUI.equipmentStatsPanel.setVisible(false);
+        invoUI.inventoryPanel.setVisible(false);
+        invoUI.itemHealingValue.setVisible(false);
+        invoUI.itemPriceLabel.setVisible(false);
+        invoUI.itemLabel.setVisible(false); // Hide item label after using the item
+        invoUI.equipmentDamageOrArmorValue.setVisible(false);
+        invoUI.useItemButton.setVisible(false); // Hide useItemButton after using the item
+        invoUI.closeItemButton.setVisible(false);
         
     }
 

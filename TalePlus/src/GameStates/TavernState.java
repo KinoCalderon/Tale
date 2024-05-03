@@ -4,11 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import npc.TavernShopKeeper;
-import package01.Game;
-import package01.InventoryHandler;
-import package01.InventoryManager;
-import package01.Player;
-import package01.UI;
+import package01.*;
 import package04.SuperConsumable;
 import package04.SuperItem;
 
@@ -21,8 +17,8 @@ public class TavernState extends GameState implements ActionListener{
 	//private JButton shopButton1, shopButton2;
 	//private JButton shopKeeperButton1, shopKeeperButton2;
 
-	public TavernState(Game game, Player player, UI ui, InventoryHandler iHandler) {
-		super(game, player, ui, iHandler);
+	public TavernState(Game game, Player player, UI ui, InventoryUI invoUI) {
+		super(game, player, ui, invoUI);
 		setName("TavernState");
 		ui.buyItemButton.addActionListener(this);
 	
@@ -50,12 +46,12 @@ public class TavernState extends GameState implements ActionListener{
 		//UPDATE THE PLAYERS LOCATION IN THE GAME OUTPUT AREA
 		ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
 		ui.shopKeeperPanel.setVisible(true);
-		iHandler.inventoryPanel.setVisible(true);
-		iHandler.inventoryButton1.setText(player.inventoryItems[0].getName());
-		iHandler.inventoryButton2.setText(player.inventoryItems[1].getName());
-		iHandler.inventoryButton3.setText(player.inventoryItems[2].getName());
-		iHandler.inventoryButton4.setText(player.inventoryItems[3].getName());
-		iHandler.inventoryButton5.setText(player.inventoryItems[4].getName());
+		invoUI.inventoryPanel.setVisible(true);
+		invoUI.inventoryButton1.setText(player.inventoryItems[0].getName());
+		invoUI.inventoryButton2.setText(player.inventoryItems[1].getName());
+		invoUI.inventoryButton3.setText(player.inventoryItems[2].getName());
+		invoUI.inventoryButton4.setText(player.inventoryItems[3].getName());
+		invoUI.inventoryButton5.setText(player.inventoryItems[4].getName());
 		
 		ui.button4.setVisible(true);
 		ui.button4.setText("Exit");
@@ -112,7 +108,7 @@ public class TavernState extends GameState implements ActionListener{
 			ui.buyItemButton.setVisible(true);
 			ui.closeItemButton.setVisible(true);
 			ui.equipmentDamageOrArmorValue.setVisible(false);
-			iHandler.CloseInventoryHandlerUi();
+			invoUI.CloseInventoryUI();
 			ui.RemoveOutputTextPanelAddInfoPanel();
 			
 	        player.setPlayerItemIndex(0);  
@@ -137,7 +133,7 @@ public class TavernState extends GameState implements ActionListener{
 					ui.buyItemButton.setVisible(true);
 					ui.closeItemButton.setVisible(true);
 					ui.itemHealingValue.setVisible(false);
-					iHandler.CloseInventoryHandlerUi();
+					invoUI.CloseInventoryUI();
 					ui.RemoveOutputTextPanelAddInfoPanel();
 					
 					player.setPlayerItemIndex(0);  
@@ -169,7 +165,7 @@ public class TavernState extends GameState implements ActionListener{
 			ui.buyItemButton.setVisible(true);
 			ui.closeItemButton.setVisible(true);
 			ui.equipmentDamageOrArmorValue.setVisible(false);
-			iHandler.CloseInventoryHandlerUi();
+			invoUI.CloseInventoryUI();
 			ui.RemoveOutputTextPanelAddInfoPanel();
 			
 	        player.setPlayerItemIndex(1);  
@@ -194,7 +190,7 @@ public class TavernState extends GameState implements ActionListener{
 					ui.buyItemButton.setVisible(true);
 					ui.closeItemButton.setVisible(true);
 					ui.itemHealingValue.setVisible(false);
-					iHandler.CloseInventoryHandlerUi();
+					invoUI.CloseInventoryUI();
 					ui.RemoveOutputTextPanelAddInfoPanel();
 					
 					
@@ -220,13 +216,13 @@ public class TavernState extends GameState implements ActionListener{
 			ui.goldLabel.setText(" Gold: " + player.getGold());
 			System.out.println("-" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "gold");
 			System.out.println(player.getGold());
-			
-			
-		   	iHandler.inventoryButton1.setText(player.inventoryItems[0].getName());
-		   	iHandler.inventoryButton2.setText(player.inventoryItems[1].getName());
-		   	iHandler.inventoryButton3.setText(player.inventoryItems[2].getName());
-		   	iHandler.inventoryButton4.setText(player.inventoryItems[3].getName());
-		   	iHandler.inventoryButton5.setText(player.inventoryItems[4].getName());
+
+
+				invoUI.inventoryButton1.setText(player.inventoryItems[0].getName());
+				invoUI.inventoryButton2.setText(player.inventoryItems[1].getName());
+				invoUI.inventoryButton3.setText(player.inventoryItems[2].getName());
+				invoUI.inventoryButton4.setText(player.inventoryItems[3].getName());
+				invoUI.inventoryButton5.setText(player.inventoryItems[4].getName());
 				ui.RemoveInfoPanelAddOutputTextPanel();
 				ui.updateGameTextOutputArea("Item bought " + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getName()
 						+ " -" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "Gold.");
@@ -247,7 +243,7 @@ public class TavernState extends GameState implements ActionListener{
 		case "closeItem":
 			
 			ui.CloseItemUi();
-			iHandler.CloseInventoryHandlerUi();
+			invoUI.CloseInventoryUI();
 			
 			break;
 			

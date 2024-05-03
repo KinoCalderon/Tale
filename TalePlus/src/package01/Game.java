@@ -13,12 +13,13 @@ public class Game {
 	public Player player  = new Player(this);
 	public UI ui = new UI(player, this); // create a new UI instance;
 	public PlayerStatsUI playerStatsUI = new PlayerStatsUI(player, ui);
-	public InventoryHandler inventoryHandler = new InventoryHandler(player, ui, this);
-	public TitleScreenState titleScreenState = new TitleScreenState(this, player, ui, inventoryHandler);
-	public TownState townState = new TownState(this, player, ui, inventoryHandler);
-	public TavernState tavernState = new TavernState(this, player, ui, inventoryHandler);
-	public PlayerStatsScreenState playerStatsScreenState = new PlayerStatsScreenState(this, player, ui, inventoryHandler, playerStatsUI);
-	public PlayerInventoryState playerInventoryState = new PlayerInventoryState(this, player, ui, inventoryHandler);
+	public InventoryUI invoUI = new InventoryUI(player, ui);
+	public InventoryHandler iHandler = new InventoryHandler(player, ui, this, invoUI);
+	public TitleScreenState titleScreenState = new TitleScreenState(this, player, ui, invoUI);
+	public TownState townState = new TownState(this, player, ui, invoUI);
+	public TavernState tavernState = new TavernState(this, player, ui, invoUI);
+	public PlayerStatsScreenState playerStatsScreenState = new PlayerStatsScreenState(this, player, ui, invoUI, playerStatsUI);
+	public PlayerInventoryState playerInventoryState = new PlayerInventoryState(this, player, ui, invoUI, iHandler);
 	
 
 	public static void main(String[] args) {

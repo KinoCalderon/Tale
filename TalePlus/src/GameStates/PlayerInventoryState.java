@@ -3,16 +3,13 @@ package GameStates;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import package01.Game;
-import package01.InventoryHandler;
-import package01.Player;
-import package01.UI;
+import package01.*;
 
 public class PlayerInventoryState extends GameState implements ActionListener {
-	
 
-	public PlayerInventoryState(Game game, Player player, UI ui, InventoryHandler iHandler) {
-		super(game, player, ui, iHandler);
+	public PlayerInventoryState(Game game, Player player, UI ui, InventoryUI invoUI, InventoryHandler iHandler) {
+		super(game, player, ui, invoUI, iHandler);
+
 		setName("InventoryState");
 		// TODO Auto-generated constructor stub
 	}
