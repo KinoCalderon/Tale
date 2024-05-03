@@ -1,12 +1,16 @@
-package package01;
+package package02;
+
+import package01.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class InventoryUI {
-
+    Player player;
+    UI ui;
     public JButton[] equipmentButtons = new JButton[2];
-    public JButton inventoryButton, inventoryButton1, inventoryButton2, inventoryButton3, inventoryButton4, inventoryButton5;
+    public JButton[] inventoryButtons = new JButton[5];
+    public JButton inventoryButton;
     public JButton useItemButton;
     public JButton closeItemButton;
     public JPanel inventoryPanel;
@@ -22,6 +26,8 @@ public class InventoryUI {
     public JPanel equipmentInfoPopUpBoxPanel;
 
     public InventoryUI(Player player, UI ui){
+        this.player = player;
+        this.ui = ui;
 
         playerBagIcon = new ImageIcon(".//media//taleBag.png");
         inventoryButton = new JButton();
@@ -54,51 +60,49 @@ public class InventoryUI {
         inventoryPanel.add(inventoryLabel);
 
         //INVENTORY BUTTONS
-        inventoryButton1 = new JButton();
-        inventoryButton1.setBackground(Color.black);
-        inventoryButton1.setForeground(Color.white);
-        inventoryButton1.setFont(ui.normalFont);
-        inventoryButton1.setFocusPainted(false);
+        inventoryButtons[0] = new JButton();
+        inventoryButtons[0].setBackground(Color.black);
+        inventoryButtons[0].setForeground(Color.white);
+        inventoryButtons[0].setFont(ui.normalFont);
+        inventoryButtons[0].setFocusPainted(false);
+        inventoryButtons[0].setActionCommand("item1");
 
-        inventoryButton1.setActionCommand("item1");
+        inventoryButtons[1] = new JButton();
+        inventoryButtons[1].setBackground(Color.black);
+        inventoryButtons[1].setForeground(Color.white);
+        inventoryButtons[1].setFont(ui.normalFont);
+        inventoryButtons[1].setFocusPainted(false);
+        inventoryButtons[1].setActionCommand("item2");
 
-        inventoryButton2 = new JButton();
-        inventoryButton2.setBackground(Color.black);
-        inventoryButton2.setForeground(Color.white);
-        inventoryButton2.setFont(ui.normalFont);
-        inventoryButton2.setFocusPainted(false);
+        inventoryButtons[2] = new JButton();
+        inventoryButtons[2].setBackground(Color.black);
+        inventoryButtons[2].setForeground(Color.white);
+        inventoryButtons[2].setFont(ui.normalFont);
+        inventoryButtons[2].setFocusPainted(false);
 
-        inventoryButton2.setActionCommand("item2");
+        inventoryButtons[2].setActionCommand("item3");
 
-        inventoryButton3 = new JButton();
-        inventoryButton3.setBackground(Color.black);
-        inventoryButton3.setForeground(Color.white);
-        inventoryButton3.setFont(ui.normalFont);
-        inventoryButton3.setFocusPainted(false);
+        inventoryButtons[3] = new JButton();
+        inventoryButtons[3].setBackground(Color.black);
+        inventoryButtons[3].setForeground(Color.white);
+        inventoryButtons[3].setFont(ui.normalFont);
+        inventoryButtons[3].setFocusPainted(false);
 
-        inventoryButton3.setActionCommand("item3");
+        inventoryButtons[3].setActionCommand("item4");
 
-        inventoryButton4 = new JButton();
-        inventoryButton4.setBackground(Color.black);
-        inventoryButton4.setForeground(Color.white);
-        inventoryButton4.setFont(ui.normalFont);
-        inventoryButton4.setFocusPainted(false);
+        inventoryButtons[4] = new JButton();
+        inventoryButtons[4].setBackground(Color.black);
+        inventoryButtons[4].setForeground(Color.white);
+        inventoryButtons[4].setFont(ui.normalFont);
+        inventoryButtons[4].setFocusPainted(false);
 
-        inventoryButton4.setActionCommand("item4");
+        inventoryButtons[4].setActionCommand("item5");
 
-        inventoryButton5 = new JButton();
-        inventoryButton5.setBackground(Color.black);
-        inventoryButton5.setForeground(Color.white);
-        inventoryButton5.setFont(ui.normalFont);
-        inventoryButton5.setFocusPainted(false);
-
-        inventoryButton5.setActionCommand("item5");
-
-        inventoryPanel.add(inventoryButton1);
-        inventoryPanel.add(inventoryButton2);
-        inventoryPanel.add(inventoryButton3);
-        inventoryPanel.add(inventoryButton4);
-        inventoryPanel.add(inventoryButton5);
+        inventoryPanel.add(inventoryButtons[0]);
+        inventoryPanel.add(inventoryButtons[1]);
+        inventoryPanel.add(inventoryButtons[2]);
+        inventoryPanel.add(inventoryButtons[3]);
+        inventoryPanel.add(inventoryButtons[4]);
 
         itemLabel = new JLabel();
         itemLabel.setForeground(Color.white);
@@ -218,6 +222,11 @@ public class InventoryUI {
         armorLabel.setFont(ui.statsFont);
         equipmentStatsPanel.add(armorLabel);
 
+    }
+
+    public void refreshInventoryButtons(){
+        for (int i = 0; i < player.inventoryItems.length; i++)
+            inventoryButtons[i].setText(player.inventoryItems[i].getName());
     }
 
     public void CloseInventoryUI() {

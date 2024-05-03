@@ -1,9 +1,9 @@
 package npc;
 
-import package02.Weapon_Dagger;
-import package04.Item_Orange;
-import package04.Item_Potion;
-import package04.SuperItem;
+import package06.Weapon_Dagger;
+import package05.Item_Orange;
+import package05.Item_Potion;
+import package05.SuperItem;
 
 public class TavernShopKeeper {
 	

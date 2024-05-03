@@ -1,0 +1,14 @@
+package package05;
+
+public class Item_Orange extends SuperConsumable{
+	
+	public Item_Orange(){
+		
+		setName("Orange");
+		setHealingValue(-2);
+		setType("Consumable");
+		setConsumableType("Hp");
+		setPrice(1);
+	}
+
+}

@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="v.1">
-      <change afterPath="$PROJECT_DIR$/src/package01/InventoryUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" afterDir="false" />
@@ -13,11 +13,27 @@
       <change beforePath="$PROJECT_DIR$/src/GameStates/TavernState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TavernState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/TownState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TownState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/npc/TavernShopKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/npc/TavernShopKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/CustomScrollBarUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/CustomScrollBarUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/package01/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/InventoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/PlayerStatsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/PlayerStatsUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package03/InventoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package03/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/InventoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/InventoryUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/PlayerStatsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/PlayerStatsUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/Armor_Cloth_Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/Armor_Cloth_Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/SuperArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/SuperArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/SuperWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/SuperWeapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/Weapon_Dagger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/Weapon_Dagger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package03/Monster_Gandalf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Monster_Gandalf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package03/Monster_Goblin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Monster_Goblin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package03/SuperMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/SuperMonster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Item_Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Empty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Item_Orange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Orange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Item_Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/SuperConsumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/SuperConsumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/SuperItem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +82,7 @@
   "keyToString": {
     "Application.Game.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ToolWindowRun.ShowToolbar": "false",
     "git-widget-placeholder": "TaleBranch",
     "ignore.virus.scanning.warn.message": "true",
@@ -131,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714697123305</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="v.1">
+      <option name="closed" value="true" />
+      <created>1714733646593</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714733646593</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

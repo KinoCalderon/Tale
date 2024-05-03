@@ -2,13 +2,12 @@ package package01;
 //MAKE A GET INVENTORY FUNCTION THAT DISPLAYS THE PLAYERS INVO INFO TO THE UI UPDATE TEXT AREA
 //
 import GameStates.GameState;
-import GameStates.TavernState;
-import package02.Armor_Cloth_Body;
-import package02.Weapon_Dagger;
-import package04.Item_Empty;
-import package04.Item_Orange;
-import package04.Item_Potion;
-import package04.SuperItem;
+import package06.Armor_Cloth_Body;
+import package06.Weapon_Dagger;
+import package05.Item_Empty;
+import package05.Item_Orange;
+import package05.Item_Potion;
+import package05.SuperItem;
 public class Player { 
     private GameState currentState;
     private SuperItem currentWeapon;
@@ -32,6 +31,7 @@ public class Player {
     private int playerItemIndex;
     private int playerEquipmentIndex;
     private int playerInventoryIndex;
+    private int shopItemIndex;
     public SuperItem[] equippedItems = new SuperItem[3];
     public Weapon_Dagger dagger = new Weapon_Dagger();
     public Armor_Cloth_Body clothBody = new Armor_Cloth_Body();
@@ -80,7 +80,7 @@ public class Player {
       
         
     }
-    
+
 
     
     public  GameState getCurrentState() {
@@ -366,6 +366,11 @@ public class Player {
 	}
 
 
-	
+    public int getShopItemIndex() {
+        return shopItemIndex;
+    }
 
+    public void setShopItemIndex(int shopItemIndex) {
+        this.shopItemIndex = shopItemIndex;
+    }
 }

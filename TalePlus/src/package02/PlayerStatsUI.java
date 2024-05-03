@@ -1,4 +1,6 @@
-package package01;
+package package02;
+
+import package01.Player;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +19,7 @@ public class PlayerStatsUI {
     public JLabel playerStrStatLabel;
     public JLabel playerDefStatLabel;
 
-    PlayerStatsUI(Player player, UI ui) {
+    public PlayerStatsUI(Player player, UI ui) {
         this.player = player;
         this.ui = ui;
 

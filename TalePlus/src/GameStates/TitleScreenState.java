@@ -1,6 +1,8 @@
 package GameStates;
 
 import package01.*;
+import package02.InventoryUI;
+import package02.UI;
 
 public class TitleScreenState extends GameState {
     

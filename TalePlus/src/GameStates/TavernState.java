@@ -5,8 +5,11 @@ import java.awt.event.ActionListener;
 
 import npc.TavernShopKeeper;
 import package01.*;
-import package04.SuperConsumable;
-import package04.SuperItem;
+import package02.InventoryUI;
+import package02.UI;
+import package03.InventoryManager;
+import package05.SuperConsumable;
+import package05.SuperItem;
 
 
 public class TavernState extends GameState implements ActionListener{
@@ -47,11 +50,7 @@ public class TavernState extends GameState implements ActionListener{
 		ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
 		ui.shopKeeperPanel.setVisible(true);
 		invoUI.inventoryPanel.setVisible(true);
-		invoUI.inventoryButton1.setText(player.inventoryItems[0].getName());
-		invoUI.inventoryButton2.setText(player.inventoryItems[1].getName());
-		invoUI.inventoryButton3.setText(player.inventoryItems[2].getName());
-		invoUI.inventoryButton4.setText(player.inventoryItems[3].getName());
-		invoUI.inventoryButton5.setText(player.inventoryItems[4].getName());
+		invoUI.refreshInventoryButtons();
 		
 		ui.button4.setVisible(true);
 		ui.button4.setText("Exit");
@@ -98,10 +97,10 @@ public class TavernState extends GameState implements ActionListener{
 			else if(tavernShopKeeper.getShopItems(0).getType().equals("Consumable")) {
 			SuperConsumable consumableItem = (SuperConsumable) tavernShopKeeper.getShopItems(0);
 			ui.itemLabel.setText("Item: " + consumableItem.getName());
-			ui.itemPriceLabel.setText("Price: " + consumableItem.getPrice());
+			ui.itemShopPriceLabel.setText("Price: " + consumableItem.getPrice());
 			ui.itemHealingValue.setText("Heals: " + consumableItem.getHealingValue());
 			ui.itemHealingValue.setVisible(true);
-			ui.itemPriceLabel.setVisible(true);
+			ui.itemShopPriceLabel.setVisible(true);
 			ui.itemLabel.setVisible(true);
 			ui.buyItemButton.setText("Buy:");
 			ui.buyItemButton.setActionCommand("buyItem");
@@ -111,21 +110,21 @@ public class TavernState extends GameState implements ActionListener{
 			invoUI.CloseInventoryUI();
 			ui.RemoveOutputTextPanelAddInfoPanel();
 			
-	        player.setPlayerItemIndex(0);  
-	        System.out.println(player.getPlayerItemIndex());
+	        player.setShopItemIndex(0);
+	        System.out.println(player.getShopItemIndex());
 
 			}	
 					else if (tavernShopKeeper.getShopItems(0).getType().equals("Equipment")) {
 					SuperItem superItem = tavernShopKeeper.getShopItems(0);
 					ui.itemLabel.setText("Item: " + superItem.getName());
-					ui.itemPriceLabel.setText("Price: " + superItem.getPrice());
+					ui.itemShopPriceLabel.setText("Price: " + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
 						ui.equipmentDamageOrArmorValue.setText("Damage: " + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
 						ui.equipmentDamageOrArmorValue.setText("Armor: " + superItem.getArmorValue());
 						
 					}
-					ui.itemPriceLabel.setVisible(true);
+					ui.itemShopPriceLabel.setVisible(true);
 					ui.itemLabel.setVisible(true);
 					ui.equipmentDamageOrArmorValue.setVisible(true);
 					ui.buyItemButton.setText("Buy:");
@@ -136,9 +135,9 @@ public class TavernState extends GameState implements ActionListener{
 					invoUI.CloseInventoryUI();
 					ui.RemoveOutputTextPanelAddInfoPanel();
 					
-					player.setPlayerItemIndex(0);  
+					player.setShopItemIndex(0);
 				    player.setPlayerEquipmentIndex(superItem.getItemIndex());
-					System.out.println(player.getPlayerItemIndex());
+					System.out.println(player.getShopItemIndex());
 				
 			}
 			break;
@@ -155,10 +154,10 @@ public class TavernState extends GameState implements ActionListener{
 			else if(tavernShopKeeper.getShopItems(1).getType().equals("Consumable")) {
 			SuperConsumable consumableItem = (SuperConsumable) tavernShopKeeper.getShopItems(1);
 			ui.itemLabel.setText("Item: " + consumableItem.getName());
-			ui.itemPriceLabel.setText("Price: " + consumableItem.getPrice());
+			ui.itemShopPriceLabel.setText("Price: " + consumableItem.getPrice());
 			ui.itemHealingValue.setText("Heals: " + consumableItem.getHealingValue());
 			ui.itemHealingValue.setVisible(true);
-			ui.itemPriceLabel.setVisible(true);
+			ui.itemShopPriceLabel.setVisible(true);
 			ui.itemLabel.setVisible(true);
 			ui.buyItemButton.setText("Buy:");
 			ui.buyItemButton.setActionCommand("buyItem");
@@ -168,21 +167,21 @@ public class TavernState extends GameState implements ActionListener{
 			invoUI.CloseInventoryUI();
 			ui.RemoveOutputTextPanelAddInfoPanel();
 			
-	        player.setPlayerItemIndex(1);  
-	        System.out.println("player item index" + player.getPlayerItemIndex());
+	        player.setShopItemIndex(1);
+	        System.out.println("shop item index" + player.getShopItemIndex());
 
 			}	
 					else if (tavernShopKeeper.getShopItems(1).getType().equals("Equipment")) {
 					SuperItem superItem = tavernShopKeeper.getShopItems(1);
 					ui.itemLabel.setText("Item: " + superItem.getName());
-					ui.itemPriceLabel.setText("Price: " + superItem.getPrice());
+					ui.itemShopPriceLabel.setText("Price: " + superItem.getPrice());
 					if(superItem.getItemIndex() == 0) {
 						ui.equipmentDamageOrArmorValue.setText("Damage: " + superItem.getDamageValue());
 					} else if(superItem.getItemIndex() == 1) {
 						ui.equipmentDamageOrArmorValue.setText("Armor: " + superItem.getArmorValue());
 						
 					}
-					ui.itemPriceLabel.setVisible(true);
+					ui.itemShopPriceLabel.setVisible(true);
 					ui.itemLabel.setVisible(true);
 					ui.equipmentDamageOrArmorValue.setVisible(true);
 					ui.buyItemButton.setText("Buy:");
@@ -194,9 +193,9 @@ public class TavernState extends GameState implements ActionListener{
 					ui.RemoveOutputTextPanelAddInfoPanel();
 					
 					
-					player.setPlayerItemIndex(1);  
+					player.setShopItemIndex(1);
 				    player.setPlayerEquipmentIndex(superItem.getItemIndex());
-					System.out.println("player item index" + player.getPlayerItemIndex());
+					System.out.println("shop item index" + player.getShopItemIndex());
 				
 			}
 			break;
@@ -210,22 +209,17 @@ public class TavernState extends GameState implements ActionListener{
 			InventoryManager inventoryManager = new InventoryManager();
 			//check if player inventory is full
 			
-			if(inventoryManager.SellPlayerItem(player, tavernShopKeeper.getShopItems(player.getPlayerItemIndex()))) {
+			if(inventoryManager.BuyItem(player, tavernShopKeeper.getShopItems(player.getShopItemIndex()))) {
 				System.out.println("attempting to sell player item..");
 
 			ui.goldLabel.setText(" Gold: " + player.getGold());
-			System.out.println("-" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "gold");
+			System.out.println("-" + tavernShopKeeper.getShopItems(player.getShopItemIndex()).getPrice() + "gold");
 			System.out.println(player.getGold());
 
-
-				invoUI.inventoryButton1.setText(player.inventoryItems[0].getName());
-				invoUI.inventoryButton2.setText(player.inventoryItems[1].getName());
-				invoUI.inventoryButton3.setText(player.inventoryItems[2].getName());
-				invoUI.inventoryButton4.setText(player.inventoryItems[3].getName());
-				invoUI.inventoryButton5.setText(player.inventoryItems[4].getName());
+				invoUI.refreshInventoryButtons();//always!!
 				ui.RemoveInfoPanelAddOutputTextPanel();
-				ui.updateGameTextOutputArea("Item bought " + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getName()
-						+ " -" + tavernShopKeeper.getShopItems(player.getPlayerItemIndex()).getPrice() + "Gold.");
+				ui.updateGameTextOutputArea("Item bought " + tavernShopKeeper.getShopItems(player.getShopItemIndex()).getName()
+						+ " -" + tavernShopKeeper.getShopItems(player.getShopItemIndex()).getPrice() + "Gold.");
 
 			} else {			
 					ui.RemoveInfoPanelAddOutputTextPanel();
@@ -234,7 +228,7 @@ public class TavernState extends GameState implements ActionListener{
 				
 			}{System.out.println("end of buyItem case check");
 			
-			System.out.println("player item index" + player.getPlayerItemIndex());
+			System.out.println("shop item index" + player.getShopItemIndex());
 			
 			}
 			

@@ -6,6 +6,10 @@ import GameStates.PlayerStatsScreenState;
 import GameStates.TavernState;
 import GameStates.TitleScreenState;
 import GameStates.TownState;
+import package02.InventoryUI;
+import package02.PlayerStatsUI;
+import package02.UI;
+import package03.InventoryHandler;
 
 public class Game {
 	

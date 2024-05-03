@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import package01.*;
+import package02.InventoryUI;
+import package02.UI;
 
 public class TownState extends GameState implements ActionListener{
 

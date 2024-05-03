@@ -1,6 +1,10 @@
 package GameStates;
 
 import package01.*;
+import package02.InventoryUI;
+import package02.PlayerStatsUI;
+import package02.UI;
+import package03.InventoryHandler;
 
 import java.util.Stack;
 
