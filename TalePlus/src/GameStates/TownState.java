@@ -1,17 +1,17 @@
 package GameStates;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import main.*;
+import gameUI.InventoryUI;
+import gameUI.UI;
 
-import package01.*;
-import package02.InventoryUI;
-import package02.UI;
+public class TownState extends GameState{
 
-public class TownState extends GameState implements ActionListener{
 
     public TownState(Game game, Player player, UI ui, InventoryUI invoUI) {
         super(game, player, ui, invoUI);
         setName("TownState");
+
+
         
     }
 
@@ -28,33 +28,16 @@ public class TownState extends GameState implements ActionListener{
         // Update the player's game screen and UI
     	ui.RemoveInfoPanelAddOutputTextPanel();
     	ui.updateGameTextOutputArea("Welcome to " + player.getCurrentState().getName());
-    	ui.shopKeeperPanel.setVisible(false);
+    	//ui.shopKeeperPanel.setVisible(false);
     	invoUI.CloseInventoryUI();
-    	
-    	ui.button1.setVisible(true);
-    	ui.button1.setText("Tavern");
-    	ui.button1.removeActionListener(this);
-        ui.button1.addActionListener(this);
-        ui.button4.setVisible(false);
-        
-        ui.playerStatsScreenButton.setVisible(true);
-        ui.playerStatsScreenButton.removeActionListener(this);
-        ui.playerStatsScreenButton.addActionListener(this);
-        ui.playerStatsScreenButton.setActionCommand("playerStatsButton");
-        
-        
-        //ui.playerStatsScreenButton.addActionListener(e -> {pushStateAndSetCurrent(game.playerStatsScreenState, player);});
-        //iHandler.inventoryButton.addActionListener(e->{pushStateAndSetCurrent(game.playerInventoryState, player);});
-        
 
         // Hide the title screen
         ui.titleNamePanel.setVisible(false);
         ui.startButtonPanel.setVisible(false);
         
         // Show the game screen 
-        //ui.picturePanel.setLayout(new BorderLayout());
-    	ui.picturePane.setVisible(true);
-        ui.pictureLabel.setVisible(false);
+
+        ui.toggleMainGraphicsPanelVisibility(true);
         ui.buttonPanel.setVisible(true);
         ui.masterPlayerPanel.setVisible(true);
         
@@ -76,31 +59,8 @@ public class TownState extends GameState implements ActionListener{
         // TODO Auto-generated method stub
     }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String yourChoice = e.getActionCommand();
-		
-		switch(yourChoice) {
-		case "tavernButton":
-			System.out.println("button1 is pressed");
-			pushStateAndSetCurrent(game.tavernState, player);
-			
-			break;
-			
-		case "playerStatsButton":
-			System.out.println("Attempting to access PlayerStatsScreenState Switch Case*");
-			System.out.println(player.getShopStatus());
-			if(player.getShopStatus().equals("close")) {
-			pushStateAndSetCurrent(game.playerStatsScreenState, player);
-			} else {
-				System.out.println("Sorry can't open PlayerStats*");
-				System.out.println(player.getShopStatus());
-			}
-			break;
-		}			
-	}
 }
+
 		
 	
 

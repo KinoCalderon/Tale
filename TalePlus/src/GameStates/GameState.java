@@ -1,10 +1,12 @@
 package GameStates;
 
-import package01.*;
-import package02.InventoryUI;
-import package02.PlayerStatsUI;
-import package02.UI;
-import package03.InventoryHandler;
+import main.*;
+import gameUI.InventoryUI;
+import gameUI.PlayerStatsUI;
+import gameUI.ShopKeeperUI;
+import gameUI.UI;
+import gameHandlers.InventoryHandler;
+import gameHandlers.PlayerStatsHandler;
 
 import java.util.Stack;
 
@@ -22,8 +24,10 @@ public abstract class GameState {
     protected Player player;
     protected UI ui;
     protected InventoryUI invoUI;
+    protected PlayerStatsHandler sHandler;
     protected InventoryHandler iHandler;
     protected PlayerStatsUI playerStatsUI;
+    protected ShopKeeperUI shopKeeperUI;
     
     private String name;
     
@@ -52,6 +56,24 @@ public abstract class GameState {
         this.invoUI = invoUI;
         this.ui = ui;
     }
+
+    public GameState(Game game, Player player, UI ui, PlayerStatsHandler sHandler, PlayerStatsUI playerStatsUI) {
+        this.game = game;
+        this.player = player;
+        this.ui = ui;
+        this.sHandler = sHandler;
+        this.playerStatsUI = playerStatsUI;
+    }
+
+    public GameState(Game game, Player player, UI ui, InventoryUI invoUI, ShopKeeperUI shopKeeperUI) {
+        this.game = game;
+        this.ui = ui;
+        this.player = player;
+        this.invoUI = invoUI;
+        this.shopKeeperUI = shopKeeperUI;
+
+    }
+
 
     // Method to update the game state
     public abstract void update();

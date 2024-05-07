@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="v.1">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/playerImage.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/taleForest1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameHandlers/GameObjectHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameHandlers/MonsterHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameHandlers/PlayerGraphicsHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameHandlers/PlayerStatsHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameHandlers/ShopKeeperHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameMonsters/Monster_Goblin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameMonsters/SuperMonster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameNPC/SuperShopKeeperObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameNPC/TavernShopKeeperObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameObjects/PlatformObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameObjects/SuperGameObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gameUI/ShopKeeperUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/PlayerInventoryState.java" afterDir="false" />
@@ -13,27 +26,27 @@
       <change beforePath="$PROJECT_DIR$/src/GameStates/TavernState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TavernState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TitleScreenState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameStates/TownState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TownState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/npc/TavernShopKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/npc/TavernShopKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/CustomScrollBarUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/CustomScrollBarUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package03/InventoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package03/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/InventoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/InventoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package01/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/PlayerStatsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/PlayerStatsUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package01/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package02/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package02/Armor_Cloth_Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/Armor_Cloth_Body.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package02/SuperArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/SuperArmor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package02/SuperWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/SuperWeapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package02/Weapon_Dagger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package06/Weapon_Dagger.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package03/Monster_Gandalf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Monster_Gandalf.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package03/Monster_Goblin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/Monster_Goblin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package03/SuperMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package04/SuperMonster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/Item_Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Empty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/Item_Orange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Orange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/Item_Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/Item_Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/SuperConsumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/SuperConsumable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package04/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/package05/SuperItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/npc/TavernShopKeeper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package01/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/CustomScrollBarUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/CustomScrollBarUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/InventoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/InventoryUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/PlayerStatsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/PlayerStatsUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package02/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package03/InventoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/InventoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package03/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Monster_Gandalf.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/Monster_Goblin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package04/SuperMonster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package05/Item_Empty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/Item_Empty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package05/Item_Orange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/Item_Orange.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package05/Item_Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/Item_Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package05/SuperConsumable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/SuperConsumable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package05/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/SuperItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package06/Armor_Cloth_Body.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameEquipment/Armor_Cloth_Body.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package06/SuperArmor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameEquipment/SuperArmor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package06/SuperWeapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameEquipment/SuperWeapon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package06/Weapon_Dagger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameEquipment/Weapon_Dagger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +100,7 @@
     "git-widget-placeholder": "TaleBranch",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PC/git/TaleRpg/TalePlus/media",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
@@ -94,13 +108,17 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\git\TaleRpg\TalePlus\media" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\git\TaleRpg\TalePlus\media" />
       <recent name="C:\Users\PC\git\TaleRpg\TalePlus\src\GameStates" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Game" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="package01.Game" />
+      <option name="MAIN_CLASS_NAME" value="main.Game" />
       <module name="TalePlus" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -156,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714733646593</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="v.1">
+      <option name="closed" value="true" />
+      <created>1714744035900</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1714744035900</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,5 +201,15 @@
     <MESSAGE value="V.1&#10;changed tavernsState switch case statement from .equals(&quot;&quot;) to .isempty() on line 98&#10;changed tavernStates button0 case and removed superitem cast from line 123 &amp; 180&#10;changed line 155 .isequals to .isempty&#10;removed a determinetype method from superitem&#10;&#10;inventoryHnadler - removed equipbutton1-2 and inventorymanager from fields&#10;&#10;removed this code &quot;SuperConsumable consumableItem = (SuperConsumable) currentItem;&quot; from line 236 and put the consumableItem cast inside of the instace of if statement&#10;line 273 removed superItem cast to superitem because its already SuperItem superItem&#10;line 411 removed - isequals added .isempty&#10;line 442 removed - super item casting from statement" />
     <MESSAGE value="v.1" />
     <option name="LAST_COMMIT_MESSAGE" value="v.1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

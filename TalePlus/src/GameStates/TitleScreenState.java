@@ -1,8 +1,8 @@
 package GameStates;
 
-import package01.*;
-import package02.InventoryUI;
-import package02.UI;
+import main.*;
+import gameUI.InventoryUI;
+import gameUI.UI;
 
 public class TitleScreenState extends GameState {
     

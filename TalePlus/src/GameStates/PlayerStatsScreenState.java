@@ -1,16 +1,14 @@
 package GameStates;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import package01.*;
-import package02.InventoryUI;
-import package02.PlayerStatsUI;
-import package02.UI;
+import main.*;
+import gameUI.PlayerStatsUI;
+import gameUI.UI;
+import gameHandlers.PlayerStatsHandler;
 
-public class PlayerStatsScreenState extends GameState implements ActionListener {
+public class PlayerStatsScreenState extends GameState {
 
-	public PlayerStatsScreenState(Game game, Player player, UI ui, InventoryUI invoUI, PlayerStatsUI playerStatsUI) {
-		super(game, player, ui, invoUI, playerStatsUI);
+	public PlayerStatsScreenState(Game game, Player player, UI ui, PlayerStatsHandler sHandler, PlayerStatsUI playerStatsUI) {
+		super(game, player, ui, sHandler, playerStatsUI);
 		setName("PlayerStatsState");
 		// TODO Auto-generated constructor stub
 	}
@@ -20,7 +18,7 @@ public class PlayerStatsScreenState extends GameState implements ActionListener 
 		// TODO Auto-generated method stub
 		System.out.println(getGameStateStack() + "GAME STATE STACK INSIDE PLAYER STATS SCREEN STATE");
 		
-		ui.playerStatsScreenButton.setVisible(true);
+		playerStatsUI.playerStatsScreenButton.setVisible(true);
 		System.out.println("*Players Current GameState " + player.getCurrentState());
 		
 		System.out.println("*Made it inside playerStats if loop " + getCurrentState());
@@ -34,17 +32,14 @@ public class PlayerStatsScreenState extends GameState implements ActionListener 
 	@Override
 	public void ui() {
 		// TODO Auto-generated method stub
-		ui.playerStatsScreenButton.removeActionListener(this);
-		ui.playerStatsScreenButton.addActionListener(this);
-		ui.playerStatsScreenButton.setActionCommand("statsButton");
 		
 		ui.button1.setVisible(false);
 		ui.button4.setText("Exit");
 		ui.button4.setVisible(true);
 		//ui.button4.addActionListener(e -> {goBackToPreviousState(); playerStatsUI.ClosePlayerStatsUI(); ui.playerStatsScreenButton.setVisible(true);
 		//System.out.println(getGameStateStack());});
-		ui.button4.removeActionListener(this);
-		ui.button4.addActionListener(this);
+		ui.button4.removeActionListener(sHandler);
+		ui.button4.addActionListener(sHandler);
 		ui.button4.setActionCommand("exitStatsScreen");
 		playerStatsUI.playerStatsPanel.setVisible(true);
 		System.out.println("*Made it inside PlayerStatsUI");
@@ -57,28 +52,6 @@ public class PlayerStatsScreenState extends GameState implements ActionListener 
 	@Override
 	void sound() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String yourChoice = e.getActionCommand();
-		
-		switch (yourChoice) {
-		case "statsButton": 
-
-			System.out.println("STATS PANEL ALREADY OPEN*");
-			
-			break;
-			
-		case "exitStatsScreen":
-			System.out.println("exited stats screen* " + getCurrentState());
-			ui.button4.removeActionListener(this);
-			goBackToPreviousState(player);
-			playerStatsUI.ClosePlayerStatsUI();
-			break;
-		}
 		
 	}
 

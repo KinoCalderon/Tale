@@ -1,14 +1,11 @@
 package GameStates;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import main.*;
+import gameUI.InventoryUI;
+import gameUI.UI;
+import gameHandlers.InventoryHandler;
 
-import package01.*;
-import package02.InventoryUI;
-import package02.UI;
-import package03.InventoryHandler;
-
-public class PlayerInventoryState extends GameState implements ActionListener {
+public class PlayerInventoryState extends GameState {
 
 	public PlayerInventoryState(Game game, Player player, UI ui, InventoryUI invoUI, InventoryHandler iHandler) {
 		super(game, player, ui, invoUI, iHandler);
@@ -46,8 +43,6 @@ public class PlayerInventoryState extends GameState implements ActionListener {
 		ui.button4.setText("exitInventory");
 		ui.button4.setActionCommand("exitInventory");
 		
-		
-		
 	}
 
 	@Override
@@ -57,18 +52,5 @@ public class PlayerInventoryState extends GameState implements ActionListener {
 	}
 
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		String yourChoice = e.getActionCommand();
-		
-		switch(yourChoice) {
-		case "exitInventory":
-			
-			break;
-		
-		}
-		
-	}
 
 }
