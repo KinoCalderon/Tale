@@ -30,13 +30,33 @@ public class InventoryManager {
 			slotNumber++;
 		}
 		if(player.inventoryItems[slotNumber] == player.empty && player.getGold() >= item.getPrice()) {
-			System.out.println("attempting to buy item..");
+			if (item.getName().equals("Hp Potion")){
 
-			player.inventoryItems[slotNumber] = item;
-			player.setGold(-item.getPrice());
+				System.out.println("attempting to buy item..");
+				player.addHpPotion(item);
 
-			itemSold = true;
-			System.out.println("item sold " + item.getName());
+				player.setGold(-item.getPrice());
+
+				itemSold = true;
+				System.out.println("item sold " + item.getName());
+			} else if (item.getName().equals("Mp Potion")) {
+
+				System.out.println("attempting to buy item..");
+				player.addMpPotion(item);
+
+				player.setGold(-item.getPrice());
+
+				itemSold = true;
+				System.out.println("item sold " + item.getName());
+			} else {
+				System.out.println("attempting to buy item..");
+
+				player.inventoryItems[slotNumber] = item;
+				player.setGold(-item.getPrice());
+
+				itemSold = true;
+				System.out.println("item sold " + item.getName());
+			}
 			
 		}
 		else if(!player.inventoryItems[slotNumber].getName().isEmpty() || player.getGold() < item.getPrice()) {

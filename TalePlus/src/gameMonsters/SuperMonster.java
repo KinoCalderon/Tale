@@ -11,6 +11,8 @@ import java.util.Timer;
 
 public class SuperMonster {
 
+	private int monsterSpeed;
+	private int monsterMoveDelay;
 	private String name;
 	private int hp;
 	private int maxHp;
@@ -26,9 +28,13 @@ public class SuperMonster {
 	protected UI ui;
 	protected Game game;
 	private int monsterGold;
+	private int damageCooldown = 1000;
+	private int lastDamageTime = 0;
+
+	private boolean movingRight = true; // Flag to track the movement direction
 
 
-
+	private Timer moveTimer;
 
 	public Timer monsterRespawnTimer;
 
@@ -37,16 +43,16 @@ public class SuperMonster {
 		this.player = player;
 		this.ui = ui;
 
-
-		// Initialize respawn timer
 		monsterRespawnTimer = new Timer();
-
-		// Start respawn timer
-		startRespawnTimer();
-		DropLoot();
-
+		moveTimer = new Timer();
 	}
 
+
+
+	// Method to stop the move timer
+	public void stopMoveTimer() {
+		moveTimer.cancel();
+	}
 
 	// Method to start the respawn timer
 	public void startRespawnTimer() {
@@ -70,38 +76,38 @@ public class SuperMonster {
 		}, 7000); // 7 seconds delay (7000 milliseconds)
 	}
 
-
-	// Method to respawn the monster
 	public void respawn() {
 		setHp(maxHp);
 		setMonsterX(getMonsterOriginalX());
 		setMonsterY(getMonsterOriginalY());
-		monsterLabel.setLocation(getMonsterOriginalX(),getMonsterOriginalY());
+		monsterLabel.setLocation(getMonsterOriginalX(), getMonsterOriginalY());
 		ui.mainGraphicsPane.add(monsterLabel);
 		ui.mainGraphicsPane.repaint();
-
-
-		// Restart respawn timer for the next respawn cycle
-
 	}
 
-	public void DropLoot(){
-
-			player.setGold(this.monsterGold);
-			ui.goldLabel.setText(" Gold: " + player.getGold());
-
+	public void DropLoot() {
+		player.setGold(this.monsterGold);
+		ui.goldLabel.setText(" Gold: " + player.getGold());
 	}
 
 	public boolean CollidesWithPlayer(Player player) {
 		Rectangle monsterBounds = new Rectangle(monsterX, monsterY, width, height);
-		Rectangle playerBounds = new Rectangle(player.getPlayerX(), player.getPlayerY(), player.getPLAYER_WIDTH_X(), player.getPLAYER_HEIGHT_Y());
+		Rectangle playerBounds = new Rectangle(player.getPlayerX(), player.getPlayerY()+15, player.getPLAYER_WIDTH_X(), player.getPLAYER_HEIGHT_Y());
+
+
 
 		return monsterBounds.intersects(playerBounds);
 	}
 
+	public boolean isMovingRight() {
+		return movingRight;
+	}
 
+	public void setMovingRight(boolean movingRight) {
+		this.movingRight = movingRight;
+	}
 
-	public void DamageEnemy(int damage){
+	public void HurtMonster(int damage){
 		this.hp = this.hp - damage;
 	}
 	public String getName() {
@@ -200,4 +206,22 @@ public class SuperMonster {
 	public void setMonsterOriginalY(int monsterOriginalY) {
 		this.monsterOriginalY = monsterOriginalY;
 	}
+
+	public int getMonsterSpeed() {
+		return monsterSpeed;
+	}
+
+	public void setMonsterSpeed(int monsterSpeed) {
+		this.monsterSpeed = monsterSpeed;
+	}
+
+	public int getMonsterMoveDelay() {
+		return monsterMoveDelay;
+	}
+
+	public void setMonsterMoveDelay(int monsterMoveDelay) {
+		this.monsterMoveDelay = monsterMoveDelay;
+	}
+
+	// Other getters and setters...
 }

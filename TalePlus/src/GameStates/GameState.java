@@ -1,5 +1,6 @@
 package GameStates;
 
+import gameHandlers.ShopKeeperHandler;
 import main.*;
 import gameUI.InventoryUI;
 import gameUI.PlayerStatsUI;
@@ -28,6 +29,7 @@ public abstract class GameState {
     protected InventoryHandler iHandler;
     protected PlayerStatsUI playerStatsUI;
     protected ShopKeeperUI shopKeeperUI;
+    protected ShopKeeperHandler shopKeeperHandler;
     
     private String name;
     
@@ -65,14 +67,17 @@ public abstract class GameState {
         this.playerStatsUI = playerStatsUI;
     }
 
-    public GameState(Game game, Player player, UI ui, InventoryUI invoUI, ShopKeeperUI shopKeeperUI) {
+    public GameState(Game game, Player player, UI ui, InventoryUI invoUI, ShopKeeperUI shopKeeperUI, ShopKeeperHandler shopKeeperHandler) {
         this.game = game;
         this.ui = ui;
         this.player = player;
         this.invoUI = invoUI;
         this.shopKeeperUI = shopKeeperUI;
+        this.shopKeeperHandler = shopKeeperHandler;
 
     }
+
+
 
 
     // Method to update the game state

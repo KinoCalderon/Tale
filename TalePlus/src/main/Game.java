@@ -31,12 +31,14 @@ public class Game {
 	public ShopKeeperHandler shopKeeperHandler = new ShopKeeperHandler(this,player,ui,invoUI,shopKeeperUI);
 	public InventoryHandler iHandler = new InventoryHandler(player, ui, this, invoUI, shopKeeperUI);
 	public PlayerStatsHandler sHandler = new PlayerStatsHandler(this, player, ui, playerStatsUI);
-	public PlayerGraphicsHandler pHandler = new PlayerGraphicsHandler(this, player, ui, monsterHandler, gameObjectHandler);
+	public PlayerAbilitiesHandler playerAbilitiesHandler = new PlayerAbilitiesHandler(this,player,ui,monsterHandler);
+	public PlayerGraphicsHandler pHandler = new PlayerGraphicsHandler(this, player, ui, monsterHandler, gameObjectHandler, playerAbilitiesHandler);
+
 
 
 	public TitleScreenState titleScreenState = new TitleScreenState(this, player, ui, invoUI);
 	public TownState townState = new TownState(this, player, ui, invoUI);
-	public TavernState tavernState = new TavernState(this, player, ui, invoUI,shopKeeperUI);
+	public TavernState tavernState = new TavernState(this, player, ui, invoUI,shopKeeperUI,shopKeeperHandler);
 	public PlayerStatsScreenState playerStatsScreenState = new PlayerStatsScreenState(this, player, ui, sHandler, playerStatsUI);
 	public PlayerInventoryState playerInventoryState = new PlayerInventoryState(this, player, ui, invoUI, iHandler);
 

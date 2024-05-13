@@ -3,6 +3,7 @@ package GameStates;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import gameHandlers.ShopKeeperHandler;
 import main.*;
 import gameUI.InventoryUI;
 import gameUI.ShopKeeperUI;
@@ -17,8 +18,8 @@ public class TavernState extends GameState implements ActionListener {
 	//private JButton shopButton1, shopButton2;
 	//private JButton shopKeeperButton1, shopKeeperButton2;
 
-	public TavernState(Game game, Player player, UI ui, InventoryUI invoUI, ShopKeeperUI shopKeeperUI) {
-		super(game, player, ui, invoUI, shopKeeperUI);
+	public TavernState(Game game, Player player, UI ui, InventoryUI invoUI, ShopKeeperUI shopKeeperUI, ShopKeeperHandler shopKeeperHandler) {
+		super(game, player, ui, invoUI, shopKeeperUI, shopKeeperHandler);
 		setName("TavernState");
 
 
@@ -74,6 +75,8 @@ public class TavernState extends GameState implements ActionListener {
 				ui.button1.setVisible(true);
 				player.setShopStatus("close");
 				ui.button4.removeActionListener(this);
+				ui.button4.setVisible(false);
+				shopKeeperHandler.GetShopKeeperFromIndex(0).shopKeeperButton.addActionListener(shopKeeperHandler);
 				break;
 		}
 

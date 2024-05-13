@@ -13,7 +13,7 @@ public class Monster_Goblin extends SuperMonster{
 		super(game, player, ui);
 
 		setName("Goblin");
-		setHp(5);
+		setHp(10);
 		setMaxHp(5);
 		setMonsterGold(2);
 		setMonsterDamage(1);
@@ -23,6 +23,8 @@ public class Monster_Goblin extends SuperMonster{
 		setMonsterY(y);
 		setHeight(50);
 		setWidth(25);
+		setMonsterSpeed(3);
+		setMonsterMoveDelay(500);
 
 		monsterLabel = new JLabel();
 		monsterLabel.setLocation(getMonsterX(), getMonsterY());

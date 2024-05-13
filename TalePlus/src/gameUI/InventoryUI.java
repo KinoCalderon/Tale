@@ -212,13 +212,13 @@ public class InventoryUI {
         ui.mainGraphicsPane.add(equipmentInfoPopUpBoxPanel, JLayeredPane.DRAG_LAYER);
 
 
-        damageLabel = new JLabel("Damage:" + player.getCurrentWeapon().getDamageValue());
+        damageLabel = new JLabel("Damage: " + player.getCurrentWeapon().getDamageValue());
         damageLabel.setForeground(Color.white);
         damageLabel.setVisible(true);
         damageLabel.setFont(ui.statsFont);
         equipmentStatsPanel.add(damageLabel);
 
-        armorLabel = new JLabel("Armor:" + player.getCurrentArmor().getArmorValue());
+        armorLabel = new JLabel("Armor: " + player.getCurrentArmor().getArmorValue());
         armorLabel.setForeground(Color.white);
         armorLabel.setVisible(true);
         armorLabel.setFont(ui.statsFont);

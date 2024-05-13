@@ -1,22 +1,29 @@
 package gameHandlers;
 
+import gameObjects.RopeObject;
 import main.Game;
 import main.Player;
 import gameUI.UI;
-import gameMonsters.Monster_Goblin;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.HashSet;
-import java.util.Set;
+import java.awt.font.FontRenderContext;
 
 public class PlayerGraphicsHandler implements KeyListener {
-    private static final double MOVE_SPEED = 12;
-    private static final int INITIAL_JUMP_VELOCITY = 70;
-    private static double MAX_JUMP_HEIGHT = 40; // Decreased initial jump velocity
-    private static final double GRAVITY = 30;
-    private static final int MOVEMENT_DURATION = 260;
-    private volatile boolean isSpacePressed = false;// Duration of movement in milliseconds
+    private boolean collidedWithPlatform;
+    private boolean collidesWithRope;
+    private static final int ROPE_CLIMB_HEIGHT = 5;
+    private static final double THREAD_SLEEP = 2; // Adjusted sleep duration
+    private static final double MOVE_SPEED = 10;
+    private static final int INITIAL_JUMP_VELOCITY = 40;
+    private static final int KNOCK_BACK_VELOCITY = 5;
+    private double currentJumpVelocity = 0; // Track current jump velocity
+
+    private static final double GRAVITY = 15;
+
+    private static final int MOVEMENT_DURATION = 150;
+
+
     private static final int DAMAGE_COOLDOWN = 1000;
     private long lastDamageTime = 0;
 
@@ -25,102 +32,200 @@ public class PlayerGraphicsHandler implements KeyListener {
     private UI ui;
     private MonsterHandler monsterHandler;
     private GameObjectHandler gameObjectHandler;
-    private Set<Integer> pressedKeys;
+    private PlayerAbilitiesHandler playerAbilitiesHandler;
     private PlayerState playerState;
+
+    public boolean isCollidesWithRope() {
+        return collidesWithRope;
+    }
+
+    public void setCollidesWithRope(boolean collidesWithRope) {
+        this.collidesWithRope = collidesWithRope;
+    }
 
     private enum PlayerState {
         GROUNDED,
         JUMPING,
-        FALLING
+        FALLING,
+        ON_ROPE,
+        PLATFORM
     }
 
-    public PlayerGraphicsHandler(Game game, Player player, UI ui, MonsterHandler monsterHandler, GameObjectHandler gameObjectHandler) {
+    public PlayerGraphicsHandler(Game game, Player player, UI ui, MonsterHandler monsterHandler, GameObjectHandler gameObjectHandler, PlayerAbilitiesHandler playerAbilitiesHandler) {
+        this.playerAbilitiesHandler = playerAbilitiesHandler;
         this.gameObjectHandler = gameObjectHandler;
         this.monsterHandler = monsterHandler;
         this.game = game;
         this.player = player;
         this.ui = ui;
-        this.pressedKeys = new HashSet<>();
         this.playerState = PlayerState.GROUNDED;
         ui.mainGraphicsPane.addKeyListener(this);
 
         Thread movementThread = new Thread(this::handleMovement);
         movementThread.start();
-
     }
+
+
 
     @Override
     public void keyTyped(KeyEvent e) {
-        pressedKeys.add(e.getKeyCode());
+        // Not used in this implementation
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            isSpacePressed = true; // Set the spacebar press flag
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_D) {
+            //playerAbilitiesHandler.GetAbilityFromIndex(0).RemoveAbilityFromScreen();
+            player.setPlayerMoving(true);
+            player.setSpacePressed(true);
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            playerAbilitiesHandler.GetAbilityFromIndex(0).RemoveAbilityFromScreen();
+            player.setPlayerMoving(true);
+            player.setLeftPressed(true);
+            player.setPlayerDirection("left");
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            playerAbilitiesHandler.GetAbilityFromIndex(0).RemoveAbilityFromScreen();
+            player.setPlayerMoving(true);
+            player.setRightPressed(true);
+            player.setPlayerDirection("right");
+        } else if (keyCode == KeyEvent.VK_W) {
+            playerAbilitiesHandler.GetAbilityFromIndex(0).useAbility();
+
+
+        } else if (keyCode == KeyEvent.VK_UP) {
+
+            playerAbilitiesHandler.GetAbilityFromIndex(0).RemoveAbilityFromScreen();
+            player.setPlayerMoving(true);
+            player.setUpPressed(true);
+            //player.setPlayerDirection("up");
+
+        } else if (keyCode == KeyEvent.VK_DOWN) {
+
+            playerAbilitiesHandler.GetAbilityFromIndex(0).RemoveAbilityFromScreen();
+            player.setPlayerMoving(true);
+            player.setDownPressed(true);
+            player.setPlayerDirection("down");
+
         }
-        pressedKeys.add(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            isSpacePressed = false; // Reset the spacebar press flag
+        int keyCode = e.getKeyCode();
+        if (keyCode == KeyEvent.VK_D) {
+            player.setPlayerMoving(false);
+            player.setSpacePressed(false);
+        } else if (keyCode == KeyEvent.VK_LEFT) {
+            player.setPlayerMoving(false);
+            player.setLeftPressed(false);
+        } else if (keyCode == KeyEvent.VK_RIGHT) {
+            player.setPlayerMoving(false);
+            player.setRightPressed(false);
+        } else if (keyCode == KeyEvent.VK_UP) {
+            player.setPlayerMoving(false);
+            player.setUpPressed(false);
+        } else if (keyCode == KeyEvent.VK_DOWN) {
+            player.setPlayerMoving(false);
+            player.setDownPressed(false);
         }
-        pressedKeys.remove(e.getKeyCode());
     }
 
-    private void handleMovement() {
-        long lastUpdateTime = System.currentTimeMillis();
-        boolean hasJumped = false; // Track if the jump action has been initiated
 
+
+    private void handleMovement() {
+
+        boolean hasJumped = false;
 
         while (true) {
+            int frameCount = 0;
             int dx = 0, dy = 0;
 
-            // Calculate elapsed time since last update
-            long currentTime = System.currentTimeMillis();
-            long elapsedTime = currentTime - lastUpdateTime;
-            lastUpdateTime = currentTime;
 
-            // Calculate movement based on input
-            if (pressedKeys.contains(KeyEvent.VK_A)) {
+            for (RopeObject ropeObject : gameObjectHandler.ropeObjectsList) {
+                if (ropeObject.RopeCollidesWithPlayer(player) && playerState != PlayerState.GROUNDED) {
+                    collidesWithRope = true;
+                    playerState = PlayerState.ON_ROPE;
+                    break; // Exit the loop early if collides with any rope
+                }
+            }
+
+
+
+            if (player.isLeftPressed()) {
                 dx -= MOVE_SPEED;
+                ui.playerGraphics.setIcon(ui.playerImageLeft);
             }
-            if (pressedKeys.contains(KeyEvent.VK_D)) {
+            if (player.isRightPressed()) {
                 dx += MOVE_SPEED;
+                ui.playerGraphics.setIcon(ui.playerImageRight);
+            }
+            if (player.isSpacePressed() && playerState == PlayerState.GROUNDED && !hasJumped) {
+                currentJumpVelocity = INITIAL_JUMP_VELOCITY;
+                playerState = PlayerState.JUMPING;
+                hasJumped = true;
             }
 
-            // Check if spacebar is pressed and the jump action hasn't been initiated
-            if (isSpacePressed && playerState == PlayerState.GROUNDED && !hasJumped) {
-                // Set initial jump velocity
-                dy -= INITIAL_JUMP_VELOCITY;
+            if (player.isSpacePressed() && playerState == PlayerState.PLATFORM && !hasJumped) {
+                currentJumpVelocity = INITIAL_JUMP_VELOCITY;
                 playerState = PlayerState.JUMPING;
-                hasJumped = true; // Set the flag to indicate that jump action has been initiated
-                isSpacePressed = false; // Reset spacebar press flag
+                hasJumped = true;
             }
+
+
+
 
             switch (playerState) {
                 case JUMPING:
-                    // Apply gravity and adjust jump height
-                    dy += GRAVITY * elapsedTime / 100; // Apply gravity over time
-                    if (dy >= 0) { // Player reached peak of jump
+                    collidedWithPlatform = false;
+                    hasJumped = true;
+                    //System.out.println("jumping state");
+                    if (currentJumpVelocity > 0) {
+                        dy -= currentJumpVelocity;
+                        //currentJumpVelocity -= GRAVITY;
+                    } else {
                         playerState = PlayerState.FALLING;
+
                     }
                     break;
                 case FALLING:
-                    // Apply gravity
-                    dy += GRAVITY -10 * elapsedTime / 100; // Apply gravity over time
+                    //System.out.println("falling state");
+                    hasJumped = true;
+                    //setCollidesWithRope(false);
+                    dy += GRAVITY;
                     break;
                 case GROUNDED:
-                    hasJumped = false; // Reset the jump flag when the player is grounded
+                    //System.out.println("grounded state");
+                    hasJumped = false;
                     break;
+
+                case ON_ROPE:
+                    //System.out.println("rope state");
+                    dx=0;
+                    hasJumped = false;
+
+                    if (player.isUpPressed()) {
+                        dy -= ROPE_CLIMB_HEIGHT;
+                        // Logic for climbing up the rope
+                    } else if (player.isDownPressed()) {
+                        dy += ROPE_CLIMB_HEIGHT;
+                        // Logic for climbing down the rope
+                    }
+
+                    // Additional logic for swinging, jumping off the rope, animations, collision handling, etc.
+                    break;
+
+                case PLATFORM:
+                    hasJumped = false;
+                    break;
+
             }
 
             movePlayer(dx, dy);
 
+
             try {
-                Thread.sleep(1); // Adjust sleep time for smoother movement
+                Thread.sleep((long) THREAD_SLEEP);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -130,7 +235,7 @@ public class PlayerGraphicsHandler implements KeyListener {
 
     private void movePlayer(int dx, int dy) {
         if (player.getShopStatus().equals("open")){
-            pressedKeys.clear();
+            player.setRightPressed(false); player.setRightPressed(false); player.setRightPressed(false);
         }
         int startX = ui.playerGraphics.getX();
         int startY = ui.playerGraphics.getY();
@@ -154,62 +259,50 @@ public class PlayerGraphicsHandler implements KeyListener {
             newY = Math.min(Math.max(0, newY), ui.mainGraphicsPane.getHeight() - player.getPLAYER_HEIGHT_Y());
 
             // Check if the player collides with a platform
-
-
-                for (int j = 0; j < gameObjectHandler.platformObjects.length; j++) {
-                    if (gameObjectHandler.platformObjects[j].collidesWithPlayer(player)) {
+                for (int j = 0; j < gameObjectHandler.platformObjectsList.size(); j++) {
+                    if (gameObjectHandler.platformObjectsList.get(j).PlatformCollidesWithPlayer(player)) {
                         collidedWithPlatform = true;
                         // Adjust player's Y position to prevent falling through the platform
-                        newY = Math.min(newY, gameObjectHandler.platformObjects[j].getGameObjectY() - player.getPLAYER_HEIGHT_Y());
+                        newY = Math.min(newY, gameObjectHandler.platformObjectsList.get(j).getGameObjectY() - player.getPLAYER_HEIGHT_Y());
                     }
                 }
 
-                ui.playerGraphics.setLocation(newX, newY);
-
-                // Update player position
-                player.setPlayerX(newX);
-                player.setPlayerY(newY);
-
-                long currentTime = System.currentTimeMillis();
-                if (monsterHandler.GetMonsterFromIndex(0).CollidesWithPlayer(player) && player.IsPlayerHpZero() == false && monsterHandler.GetMonsterFromIndex(0).getHp() > 0 && (currentTime - lastDamageTime) >= DAMAGE_COOLDOWN) {
-                    System.out.println(monsterHandler.GetMonsterFromIndex(0).getName() + "takes " + player.getDamage() + " Damage");
-                    monsterHandler.GetMonsterFromIndex(0).DamageEnemy(player.getDamage());
-                    System.out.println(monsterHandler.GetMonsterFromIndex(0).getHp());
-                    player.healPlayer(-monsterHandler.GetMonsterFromIndex(0).getMonsterDamage());
-                    ui.hpLabel.setText("HP: " + player.getCurrentHp() + "/" + player.getMaxHp());
-                    player.IsPlayerHpZero();
-                    lastDamageTime = currentTime;
-                    // Update last damage time
 
 
-                } else if (monsterHandler.GetMonsterFromIndex(0).CollidesWithPlayer(player) && monsterHandler.GetMonsterFromIndex(0).getHp() <= 0) {
+            monsterHandler.HandleMonsterCollision();
 
-                    ui.mainGraphicsPane.remove(monsterHandler.GetMonsterFromIndex(0).monsterLabel);
-                    monsterHandler.GetMonsterFromIndex(0).setMonsterX(0);
-                    monsterHandler.GetMonsterFromIndex(0).setMonsterY(0);
-                    ui.mainGraphicsPane.repaint();
-                    monsterHandler.GetMonsterFromIndex(0).startRespawnTimer();
+            ui.playerGraphics.setLocation(newX, newY);
 
-                }
+            // Update player position
+            player.setPlayerX(newX);
+            player.setPlayerY(newY);
 
-                try {
-                    Thread.sleep(1); // Adjust for smoother movement
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+            if (player.getPlayerDirection().equals("right")){
+                playerAbilitiesHandler.GetAbilityFromIndex(0).abilityLabel.setLocation(newX+player.getPLAYER_WIDTH_X(),newY+player.getPLAYER_CENTER_Y());
+
+            }else if (player.getPlayerDirection().equals("left")){
+                playerAbilitiesHandler.GetAbilityFromIndex(0).abilityLabel.setLocation(newX-player.getPLAYER_WIDTH_X()*2,newY+player.getPLAYER_CENTER_Y());
+            }
+
+            try {
+                Thread.sleep(2); // Adjust for smoother movement
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
 
         }
 
 
         // Update player state
-        if ((endY >= ui.mainGraphicsPane.getHeight() - player.getPLAYER_HEIGHT_Y()) || collidedWithPlatform) {
+        if ((endY >= ui.mainGraphicsPane.getHeight() - player.getPLAYER_HEIGHT_Y()) ) {
             playerState = PlayerState.GROUNDED;
+        } else if (collidedWithPlatform) {
+            playerState = PlayerState.PLATFORM;
+
         } else {
             playerState = PlayerState.FALLING;
         }
     }
-
-
-
 }

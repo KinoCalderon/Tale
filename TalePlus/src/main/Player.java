@@ -4,14 +4,26 @@ package main;
 import GameStates.GameState;
 import gameEquipment.Armor_Cloth_Body;
 import gameEquipment.Weapon_Dagger;
-import gameItems.Item_Empty;
-import gameItems.Item_Orange;
-import gameItems.Item_Potion;
-import gameItems.SuperItem;
+import gameItems.*;
+
+import java.util.ArrayList;
+
 public class Player {
+
+
+    private volatile boolean isSpacePressed = false;
+    private volatile boolean isUpPressed = false;
+    private volatile boolean isDownPressed = false;
+    private volatile boolean isLeftPressed = false;
+    private volatile boolean isRightPressed = false;
+    private volatile boolean isPlayerMoving = false;
+    private String playerDirection;
+    private boolean isFacingRight;
     private String shopLocation;
     private final int PLAYER_WIDTH_X = 30;
-    private final int PLAYER_HEIGHT_Y = 70;
+    private final int PLAYER_HEIGHT_Y = 60;
+    private final int PLAYER_CENTER_X = PLAYER_WIDTH_X/2;
+    private final int PLAYER_CENTER_Y = PLAYER_HEIGHT_Y/2;
     private int playerX;
     private int playerY;
     private GameState currentState;
@@ -34,6 +46,7 @@ public class Player {
     private String shopStatus;
     private String inventoryStatus;
     private String statScreenStatus;
+    private String textFieldStatus;
     private int playerItemIndex;
     private int playerEquipmentIndex;
     private int playerInventoryIndex;
@@ -42,30 +55,38 @@ public class Player {
     public Weapon_Dagger dagger = new Weapon_Dagger();
     public Armor_Cloth_Body clothBody = new Armor_Cloth_Body();
 	public SuperItem[] inventoryItems = new SuperItem[5];
-	public Item_Potion potion = new Item_Potion();
-	public Item_Orange orange = new Item_Orange( );
+	public Item_Hp_Potion hpPotion = new Item_Hp_Potion();
+    public Item_Mp_Potion mpPotion = new Item_Mp_Potion();
 	public Item_Empty empty = new Item_Empty( );
-	public Game game;
+    private ArrayList<SuperItem> hpPotionArray = new ArrayList<>();
+    private ArrayList<SuperItem> mpPotionArray = new ArrayList<>();
+    public Game game;
 
     public Player( Game game) {
     	this.game = game;
 
         playerX = 5;
         playerY = 360;
+        isFacingRight = true;
+        setUpPressed(false);
+        playerDirection = "right";
 
-        equippedItems[0] = dagger;
+        equippedItems[0] = empty;
         equippedItems[1] = empty;
         equippedItems[2] = empty;
-        
-        inventoryItems[0] = potion;
-        inventoryItems[1] = orange;
+
+        hpPotionArray.add(hpPotion);
+        mpPotionArray.add(mpPotion);
+
+        inventoryItems[0] = clothBody;
+        inventoryItems[1] = dagger;
         inventoryItems[2] = empty;
-        inventoryItems[3] = dagger;
-        inventoryItems[4] = dagger;
-    	
+        inventoryItems[3] = empty;
+        inventoryItems[4] = empty;
+
         currentWeapon = equippedItems[0];
         currentArmor = equippedItems[1];
-        
+
         level = 1;
         maxHp = 10;
         currentHp = maxHp;
@@ -78,18 +99,19 @@ public class Player {
         currentExp = 0;
         maxExp = level * 10;
         gold = 100;
-        playerAlive = true;        
+        playerAlive = true;
 
         shopLocation = "none";
         statScreenStatus = "close";
         inventoryStatus = "close";
         shopStatus = "close";
-        
+        textFieldStatus = "close";
+
         setPlayerItemIndex(-1);
         setPlayerInventoryIndex(-1);
-        
-      
-        
+
+
+
     }
 
     public boolean IsPlayerHpZero(){
@@ -144,7 +166,7 @@ public class Player {
     }
 
     public void setCurrentMp(int currentMp) {
-        this.currentMp = currentMp;
+        this.currentMp += currentMp;
     }
 
     public int getMaxExp() {
@@ -453,6 +475,124 @@ public class Player {
 
     public void setShopLocation(String shopLocation) {
         this.shopLocation = shopLocation;
+    }
+
+
+    public String getTextFieldStatus() {
+        return textFieldStatus;
+    }
+
+    public void setTextFieldStatus(String textFieldStatus) {
+        this.textFieldStatus = textFieldStatus;
+    }
+
+
+    public boolean isFacingRight() {
+        return isFacingRight;
+    }
+
+    public void setFacingRight(boolean facingRight) {
+        isFacingRight = facingRight;
+    }
+
+    public boolean isSpacePressed() {
+        return isSpacePressed;
+    }
+
+    public void setSpacePressed(boolean spacePressed) {
+        isSpacePressed = spacePressed;
+    }
+
+    public boolean isLeftPressed() {
+        return isLeftPressed;
+    }
+
+    public void setLeftPressed(boolean leftPressed) {
+        isLeftPressed = leftPressed;
+    }
+
+    public boolean isRightPressed() {
+        return isRightPressed;
+    }
+
+    public void setRightPressed(boolean rightPressed) {
+        isRightPressed = rightPressed;
+    }
+
+    public String getPlayerDirection() {
+        return playerDirection;
+    }
+
+    public void setPlayerDirection(String playerDirection) {
+        this.playerDirection = playerDirection;
+    }
+
+    public boolean isPlayerMoving() {
+        return isPlayerMoving;
+    }
+
+    public void setPlayerMoving(boolean playerMoving) {
+        isPlayerMoving = playerMoving;
+    }
+
+    public int getPLAYER_CENTER_X() {
+        return PLAYER_CENTER_X;
+    }
+
+    public int getPLAYER_CENTER_Y() {
+        return PLAYER_CENTER_Y;
+    }
+
+    public ArrayList<SuperItem> getHpPotionArray() {
+        return hpPotionArray;
+    }
+
+    public void setHpPotionArray(ArrayList<SuperItem> hpPotionArray) {
+        this.hpPotionArray = hpPotionArray;
+    }
+
+    // Method to add a potion to the player's inventory
+    public void addHpPotion(SuperItem potion) {
+        hpPotionArray.add(potion);
+    }
+
+    // Method to remove a potion from the player's inventory
+    public void removeHpPotion() {
+        hpPotionArray.remove(0);
+    }
+
+    public ArrayList<SuperItem> getMpPotionArray() {
+        return mpPotionArray;
+    }
+
+    public void setMpPotionArray(ArrayList<SuperItem> mpPotionArray) {
+        this.mpPotionArray = mpPotionArray;
+    }
+
+    // Method to add a potion to the player's inventory
+    public void addMpPotion(SuperItem potion) {
+        mpPotionArray.add(potion);
+    }
+
+    // Method to remove a potion from the player's inventory
+    public void removeMpPotion() {
+        hpPotionArray.remove(0);
+    }
+
+   public boolean isUpPressed(){
+        return isUpPressed;
+   }
+
+    public void setUpPressed(boolean upPressed) {
+        isUpPressed = upPressed;
+    }
+
+    public boolean isDownPressed() {
+        return isDownPressed;
+    }
+
+    public void setDownPressed(boolean downPressed) {
+        isDownPressed = downPressed;
     }
 }
 

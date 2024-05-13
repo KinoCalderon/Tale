@@ -1,9 +1,9 @@
 package gameItems;
 
-public class Item_Potion extends SuperConsumable{
+public class Item_Hp_Potion extends SuperConsumable{
 	
-	public Item_Potion(){
-		setName("Potion");
+	public Item_Hp_Potion(){
+		setName("Hp Potion");
 		setHealingValue(10);
 		setType("Consumable");
 		setConsumableType("Hp");

@@ -3,12 +3,14 @@ package gameObjects;
 import main.Game;
 import main.Player;
 import gameUI.UI;
-import gameMonsters.SuperGameObject;
+
 
 import javax.swing.*;
 import java.awt.*;
 
 public class PlatformObject extends SuperGameObject {
+    ImageIcon platformImage = new ImageIcon(".//media//platformImage.png");
+
 
     public PlatformObject(Game game, Player player, UI ui, int x, int y, int width, int height) {
         super(game, player, ui);
@@ -24,7 +26,7 @@ public class PlatformObject extends SuperGameObject {
         gameObjectLabel.setLocation(getGameObjectX(), getGameObjectY());
         gameObjectLabel.setSize(getWidth(), getHeight());
         gameObjectLabel.setBackground(Color.blue); // Set the color as needed
-        gameObjectLabel.setOpaque(true);
+        gameObjectLabel.setIcon(platformImage);
         gameObjectLabel.setVisible(true);
         ui.mainGraphicsPane.add(gameObjectLabel, JLayeredPane.PALETTE_LAYER);
     }

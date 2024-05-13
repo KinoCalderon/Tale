@@ -10,6 +10,7 @@ public class SuperItem {
 	private int armorValue;
 	private String equipmentType;
 	private int healingValue;
+	private int mpHealingValue;
 
 	
 	
@@ -62,5 +63,13 @@ public class SuperItem {
 
 	public void setHealingValue(int healingValue) {
 		this.healingValue = healingValue;
+	}
+
+	public int getMpHealingValue() {
+		return mpHealingValue;
+	}
+
+	public void setMpHealingValue(int mpHealingValue) {
+		this.mpHealingValue = mpHealingValue;
 	}
 }
