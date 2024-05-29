@@ -31,7 +31,7 @@ public class MonsterHandler {
         this.ui = ui;
 
         Monster_Goblin monsterGoblin = new Monster_Goblin(game, player, ui, 100,320,100,320);
-        Monster_Goblin monsterGoblin1 = new Monster_Goblin(game, player, ui, 280,270,230,270);
+        Monster_Goblin monsterGoblin1 = new Monster_Goblin(game, player, ui, 160,320,120,320);
 
         AddMonsterToArray(monsterGoblin);
         AddMonsterToArray(monsterGoblin1);

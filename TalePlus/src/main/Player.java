@@ -17,6 +17,7 @@ public class Player {
     private volatile boolean isLeftPressed = false;
     private volatile boolean isRightPressed = false;
     private volatile boolean isPlayerMoving = false;
+    private boolean checkIfOnRope = false;
     private String playerDirection;
     private boolean isFacingRight;
     private String shopLocation;
@@ -593,6 +594,14 @@ public class Player {
 
     public void setDownPressed(boolean downPressed) {
         isDownPressed = downPressed;
+    }
+
+    public boolean isCheckIfOnRope() {
+        return checkIfOnRope;
+    }
+
+    public void setCheckIfOnRope(boolean checkIfOnRope) {
+        this.checkIfOnRope = checkIfOnRope;
     }
 }
 

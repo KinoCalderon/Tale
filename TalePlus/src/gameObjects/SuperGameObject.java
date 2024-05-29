@@ -28,9 +28,9 @@ public class SuperGameObject {
 
     }
 
-    public boolean PlatformCollidesWithPlayer(Player player) {
+    public boolean PlatformCollidesWithPlayer(Player player, int customPlayerX, int customPlayerY) {
         Rectangle gameObjectBounds = new Rectangle(gameObjectX, gameObjectY, width, height);
-        Rectangle playerBounds = new Rectangle(player.getPlayerX(), player.getPlayerY(), player.getPLAYER_WIDTH_X(), player.getPLAYER_HEIGHT_Y());
+        Rectangle playerBounds = new Rectangle(customPlayerX, customPlayerY, player.getPLAYER_WIDTH_X(), player.getPLAYER_HEIGHT_Y());
 
         // Calculate the player's feet position (bottom Y-axis)
         int playerFeetY = playerBounds.y + playerBounds.height;
@@ -47,21 +47,8 @@ public class SuperGameObject {
         // Check if the player's X-axis position is within the bounds of the platform
         boolean isIntersectingX = playerBounds.x + 30 >= gameObjectBounds.x && playerBounds.x <= gameObjectBounds.x + gameObjectBounds.width;
 
-        // Debug Print Statements
-        /*
-        System.out.println("----Player Feet Y: " + playerFeetY);
-        System.out.println("Platform Top Y: " + platformTopY);
-        System.out.println("Platform Bottom Y: " + platformBottomY);
-        System.out.println("Intersecting Y: " + isIntersectingY);
-        System.out.println("Player X: " + playerBounds.x);
-        System.out.println("Platform X: " + gameObjectBounds.x);
-        System.out.println("Platform Width: " + gameObjectBounds.width);
-        System.out.println("Intersecting X: " + isIntersectingX);
-*/
         // Check if both conditions are met for collision
-        boolean isGrounded = isIntersectingY && isIntersectingX;
-
-        return isGrounded;
+        return isIntersectingY && isIntersectingX;
     }
 
 
@@ -71,8 +58,9 @@ public class SuperGameObject {
         Rectangle gameObjectBounds = new Rectangle(gameObjectX+(width/2), gameObjectY, width, height);
         Rectangle playerBounds = new Rectangle(player.getPlayerX()+(player.getPLAYER_WIDTH_X()/2), player.getPlayerY(), player.getPLAYER_WIDTH_X()/2, player.getPLAYER_HEIGHT_Y());
 
+
         // Check if the player's X-axis position intersects with the GameObject's bounds
-        boolean isIntersectingX = playerBounds.intersects(gameObjectBounds) && player.isUpPressed() || player.isDownPressed();
+        boolean isIntersectingX = playerBounds.intersects(gameObjectBounds) && player.isCheckIfOnRope();
 
         return isIntersectingX;
     }

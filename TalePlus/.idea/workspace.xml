@@ -5,38 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b335608-93ba-4958-ad61-28c9b00f4941" name="Changes" comment="v.1">
-      <change afterPath="$PROJECT_DIR$/media/lightningAbilityImageLeft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/lightningAbilityImageLeft2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/lightningAbilityImageRight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/lightningAbilityImageRight2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/platformImage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/playerImageLeft.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/playerImageRight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gameAbilities/LightningAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gameAbilities/SuperAbility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gameHandlers/PlayerAbilitiesHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gameItems/Item_Mp_Potion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gameObjects/RopeObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/playerImage.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameStates/TavernState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameStates/TavernState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameHandlers/GameObjectHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/GameObjectHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameHandlers/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/InventoryManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameHandlers/MonsterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/MonsterHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameHandlers/PlayerGraphicsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/PlayerGraphicsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameHandlers/ShopKeeperHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameHandlers/ShopKeeperHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameItems/Item_Orange.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameItems/Item_Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/Item_Hp_Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameItems/SuperItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameItems/SuperItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameMonsters/Monster_Goblin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameMonsters/Monster_Goblin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameMonsters/SuperMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameMonsters/SuperMonster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameNPC/TavernShopKeeperObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameNPC/TavernShopKeeperObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameObjects/PlatformObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameObjects/PlatformObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameObjects/SuperGameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameObjects/SuperGameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameUI/InventoryUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/InventoryUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameUI/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameUI/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715067878273</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="v.1">
+      <option name="closed" value="true" />
+      <created>1715566312177</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715566312177</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

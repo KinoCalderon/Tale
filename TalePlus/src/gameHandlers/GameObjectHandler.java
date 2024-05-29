@@ -26,7 +26,7 @@ public class GameObjectHandler {
         AddPlatformToArray(platformObject1);
         AddPlatformToArray(platformObject2);
 
-        RopeObject ropeObject1 = new RopeObject(game, player, ui, 100, 370, 10, 70);
+        RopeObject ropeObject1 = new RopeObject(game, player, ui, 100, 370, 10, 60);
         AddRopeToArray(ropeObject1);
     }
 
